@@ -1,0 +1,21 @@
+html {
+	height: 100%;
+}
+
+body {
+	background: 
+		linear-gradient(
+			rgba(213, 213, 213, 0.45),
+			rgba(213, 213, 213, 0.45)
+		),
+		url("../img/background.jpg");
+	background-size: cover;
+	min-height: 100%;
+}
+
+/*  */
+
+
+.container {
+	background: #f0f0f0;;
+}

@@ -29,6 +29,10 @@ app.get('/about', (req, res) => {
 	res.render('about');
 });
 
+app.get('/search', (req, res) => {
+	console.log(req.query);
+});
+
 // -------------------------------------------------------------------
 
 // Start server:
