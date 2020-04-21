@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="css/main.css">
 		<title>Recipes App - Home</title>
 	</head>
-	<body>
+	<body class="d-flex flex-column">
 
 		{{#if user}}
 			{{>auth_nav}}
@@ -15,17 +15,22 @@
 			{{>unauth_nav}}
 		{{/if}}
 
-		<div class="container">
+		<div class="container flex-fill">
 			<div class="row">
-				<div class="col-12">{{test}}</div>
+				<div class="col-12 text-center">
+					<img src="img/logo.png" class="img-fluid" alt="Logo">
+				</div>
 			</div>
+
 			<div class="row">
-				<div class="col-12">Input here!</div>
+				<div class="col-12">
+					{{>search_form}}
+				</div>
 			</div>
 
 			{{#unless user}}
 				<div class="row">
-					<div class="col-12">
+					<div class="col-12 text-center">
 						<p>Invite message</p>
 					</div>
 				</div>

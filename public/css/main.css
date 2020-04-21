@@ -1,8 +1,17 @@
+html {
+	height: 100%;
+}
+
 body {
 	background: #898989;
+	border: 2px solid red;
+	min-height: 100%;
 }
 
 .container {
-	text-align: center;
-	background: #287132;
+	background: green;
+}
+
+.row {
+	border: 2px solid blue;
 }

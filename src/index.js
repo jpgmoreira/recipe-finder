@@ -22,9 +22,7 @@ app.use(express.static(pubDir));
 
 // Routes:
 app.get('/', (req, res) => {
-	res.render('index', {
-		test: "Recipess App"
-	});
+	res.render('index');
 });
 
 
