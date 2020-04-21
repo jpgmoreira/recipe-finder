@@ -30,7 +30,8 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/search', (req, res) => {
-	console.log(req.query);
+	const search_text = req.query['search-input'];
+	
 });
 
 // -------------------------------------------------------------------
