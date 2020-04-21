@@ -3,26 +3,35 @@ html {
 }
 
 body {
-	background: #898989;
+	background: 
+		linear-gradient(
+			rgba(213, 213, 213, 0.45),
+			rgba(213, 213, 213, 0.45)
+		),
+		url("../img/background.jpg");
+	background-size: cover;
 	min-height: 100%;
 }
 
 /*  */
 
-#signup-invitation {
-	font-size: larger;
+#invitation-p {
+	font-size: 1.7em;
 	font-family: "Muli", sans-serif;
-	color: #2f2f2f;
-}
-
-#img-logo {
-	min-width: 25%;
+	font-weight: 900;
+	color: #141414;
 }
 
 /*  */
 
 .container {
-	background: green;
+	background: 
+		radial-gradient(
+			rgba(222, 222, 222, 0.98),
+			rgba(230, 230, 230, 0.90)
+		),
+		url("../img/background.jpg");
+	background-size: cover;
 }
 
 .row {
