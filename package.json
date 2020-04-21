@@ -4,8 +4,8 @@
   "description": "A recipes application written in Node.js for learning purposes.",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js -e js,hbs"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js -e js,hbs"
   },
   "author": "João Pedro (jpgmoreira19@gmail.com)",
   "license": "ISC",

@@ -1,10 +1,4 @@
-<form style="border: 2px solid orange;">
-	<div class="form-row">
-		<div class="col-lg-11">
-			<input type="text" class="form-control" placeholder="Your recipe name...">
-		</div>
-		<div class="col-lg-1">
-			<button type="submit" class="btn btn-primary">Search!</button>
-		</div>
-	</div>
+<form>
+	<input type="text" class="form-control {{#if large}}form-control-lg{{/if}}" placeholder="Your recipe name...">
+	<button type="submit" class="btn btn-primary">Search!</button>
 </form>

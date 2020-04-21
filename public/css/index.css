@@ -1,0 +1,30 @@
+html {
+	height: 100%;
+}
+
+body {
+	background: #898989;
+	min-height: 100%;
+}
+
+/*  */
+
+#signup-invitation {
+	font-size: larger;
+	font-family: "Muli", sans-serif;
+	color: #2f2f2f;
+}
+
+#img-logo {
+	min-width: 25%;
+}
+
+/*  */
+
+.container {
+	background: green;
+}
+
+.row {
+	padding: 3.5vh 0;
+}
