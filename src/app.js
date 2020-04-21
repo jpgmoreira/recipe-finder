@@ -21,10 +21,13 @@ app.use(express.static(pubDir));
 // -------------------------------------------------------------------
 
 // Routes:
-app.get('/', (req, res) => {
+app.get(['/', '/home'], (req, res) => {
 	res.render('index');
 });
 
+app.get('/about', (req, res) => {
+	res.render('about');
+});
 
 // -------------------------------------------------------------------
 
