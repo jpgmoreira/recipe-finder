@@ -8,14 +8,28 @@
 		<title>Recipes App - Home</title>
 	</head>
 	<body>
-		
+
+		{{#if user}}
+			{{>auth_nav}}
+		{{else}}
+			{{>unauth_nav}}
+		{{/if}}
+
 		<div class="container">
 			<div class="row">
-				<div class="col-12">Recipes App</div>
+				<div class="col-12">{{test}}</div>
 			</div>
 			<div class="row">
 				<div class="col-12">Input here!</div>
 			</div>
+
+			{{#unless user}}
+				<div class="row">
+					<div class="col-12">
+						<p>Invite message</p>
+					</div>
+				</div>
+			{{/unless}}
 		</div>
 
 		<!-- Bootstrap's required scripts. -->
