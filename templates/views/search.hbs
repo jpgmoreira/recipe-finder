@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&display=swap">
 		<link rel="stylesheet" href="css/search.css">
 		<title>Search</title>
 	</head>
@@ -47,7 +47,7 @@
 				{{else}}
 					<div class="row">
 						<div class="col-12">
-							<p class="text-result">No results found! :(</p>
+							<p class="text-message">No results found! :(</p>
 						</div>
 					</div>
 				{{/if}}
@@ -55,13 +55,13 @@
 				{{#if error}}
 					<div class="row">
 						<div class="col-12">
-							<p class="text-result">{{error.message}}</p>
+							<p class="text-message">{{error.message}}</p>
 						</div>
 					</div>
 				{{else}}
 					<div class="row">
 						<div class="col-12">
-							<p class="text-result">Sorry, and unknown error has happened! :(</p>
+							<p class="text-message">Sorry, and unknown error has happened! :(</p>
 						</div>
 					</div>
 				{{/if}}
