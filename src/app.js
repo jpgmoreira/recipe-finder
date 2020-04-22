@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
+const spoonacular = require('./utils/spoonacular');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,7 +32,13 @@ app.get('/about', (req, res) => {
 
 app.get('/search', (req, res) => {
 	const search_text = req.query['search-input'];
-	
+	spoonacular(search_text)
+		.then((response) => {
+			res.send(response.data);
+		})
+		.catch((error) => {
+			res.send(error.response.data);
+		});
 });
 
 // -------------------------------------------------------------------
