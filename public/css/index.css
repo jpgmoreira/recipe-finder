@@ -8,7 +8,7 @@ body {
 			rgba(213, 213, 213, 0.45),
 			rgba(213, 213, 213, 0.45)
 		),
-		url("../img/background.jpg");
+		url("../img/background.jpg") fixed;
 	background-size: cover;
 	min-height: 100%;
 }
@@ -30,7 +30,7 @@ body {
 			rgba(222, 222, 222, 0.98),
 			rgba(230, 230, 230, 0.90)
 		),
-		url("../img/background.jpg");
+		url("../img/background.jpg") fixed;
 	background-size: cover;
 }
 

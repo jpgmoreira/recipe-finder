@@ -17,7 +17,57 @@
 		{{/if}}
 
 		<div class="container flex-fill">
-			<h1>This is the search results page.</h1>
+			<div class="row">
+				<div class="col-12">
+					<h2>Search results for <em>{{query}}</em>:</h2>
+				</div>
+			</div>
+
+			{{!-- Render search results: --}}
+			{{#if result}}
+				{{#if result.results}}
+					{{#each result.results}}
+						<div class="card">
+							<div class="card-header">
+								<h5>{{this.title}}</h5>
+							</div>
+							<div class="card-body row">
+								<div class="col-lg-4">
+									<img src="{{this.image}}" class="img-fluid recipe-list-img" alt="{{this.title}}">
+								</div>
+								<div class="col-lg-8">
+									<p class="recipe-summary">{{{this.summary}}}</p>
+								</div>
+							</div>
+							<div class="card-footer">
+								a footer
+							</div>
+						</div>
+					{{/each}}
+				{{else}}
+					<div class="row">
+						<div class="col-12">
+							<p class="text-result">No results found! :(</p>
+						</div>
+					</div>
+				{{/if}}
+			{{else}}
+				{{#if error}}
+					<div class="row">
+						<div class="col-12">
+							<p class="text-result">{{error.message}}</p>
+						</div>
+					</div>
+				{{else}}
+					<div class="row">
+						<div class="col-12">
+							<p class="text-result">Sorry, and unknown error has happened! :(</p>
+						</div>
+					</div>
+				{{/if}}
+			{{/if}}
+			{{!-- --------------------- --}}
+
 		</div>
 
 		<!-- Bootstrap's required scripts. -->

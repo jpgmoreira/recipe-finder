@@ -32,12 +32,16 @@ app.get('/about', (req, res) => {
 
 app.get('/search', (req, res) => {
 	const search_text = req.query['search-input'];
-	spoonacular(search_text)
+	spoonacular.request(search_text)
 		.then((response) => {
-			res.send(response.data);
+			res.render('search', { result: response.data, query: search_text });
+			//res.send(response.data);
 		})
 		.catch((error) => {
-			res.send(error.response.data);
+			error = error.response.data;
+			error.message = spoonacular.errorMessage(error.code);
+			res.render('search', { error, query: search_text });
+			//res.send(error);
 		});
 });
 

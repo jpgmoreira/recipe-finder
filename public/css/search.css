@@ -8,14 +8,37 @@ body {
 			rgba(213, 213, 213, 0.45),
 			rgba(213, 213, 213, 0.45)
 		),
-		url("../img/background.jpg");
+		url("../img/background.jpg") fixed;
 	background-size: cover;
 	min-height: 100%;
 }
 
 /*  */
 
-
 .container {
 	background: #f0f0f0;;
+}
+
+.card {
+	margin: 7px;
+}
+
+.card-header h5 {
+	margin: 0;
+}
+
+/*  */
+
+.recipe-list-img {
+	width: 100%;
+	height: auto;
+	padding-bottom: 7px;
+}
+
+.recipe-summary {
+	font-size: 0.96em;
+}
+
+.text-result {
+	text-align: center;
 }
