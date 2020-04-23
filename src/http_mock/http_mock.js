@@ -6,4 +6,5 @@ const nock = require('nock');
 nock('https://api.spoonacular.com')
 	.persist()
 	.get(() => true)
+	.delay(500)
 	.replyWithFile(200, path.join(__dirname, 'response.json') , {'Content-Type': 'application/json'});

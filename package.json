@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node src/app.js",
-    "dev": "NODE_ENV=development nodemon -r dotenv/config src/app.js -e js,hbs"
+    "dev": "NODE_ENV=development nodemon -r dotenv/config src/app.js -e js,hbs",
+    "no-mock": "NODE_ENV=development NOCK_OFF=true nodemon -r dotenv/config src/app.js -e js,hbs"
   },
   "author": "João Pedro (jpgmoreira19@gmail.com)",
   "license": "ISC",

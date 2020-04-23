@@ -1,4 +1,7 @@
 <form action="/search">
-	<input type="text" name="search-input" class="form-control {{#if large}}form-control-lg{{/if}}" placeholder="Your recipe is..." required>
+	<input type="text" name="searchText" class="form-control {{#if large}}form-control-lg{{/if}}" placeholder="Your recipe is..." required>
 	<button type="submit" class="btn btn-primary">Search</button>
+
+	{{!-- This form always send request for the first results page. --}}
+	<input type="hidden" name="pageNumber" value="1">
 </form>

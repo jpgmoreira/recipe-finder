@@ -36,8 +36,9 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/search', (req, res) => {
-	const searchText = req.query['search-input'];
-	spoonacular.request(searchText)
+	const searchText = req.query.searchText;
+	const pageNumber = req.query.pageNumber;
+	spoonacular.request(searchText, pageNumber)
 		.then((response) => {
 			res.render('search', { result: response.data, query: searchText });
 		})
