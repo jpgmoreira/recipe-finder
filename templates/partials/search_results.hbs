@@ -1,0 +1,47 @@
+{{!-- Render search results on search.hbs view. --}}
+{{#if result}}
+	{{#if result.results}}
+		{{#each result.results}}
+			<div class="card">
+				<div class="card-header">
+					<h5>{{this.title}}</h5>
+				</div>
+				<div class="card-body row">
+					<div class="col-lg-4">
+						<img src="{{this.image}}" class="img-fluid recipe-list-img" alt="{{this.title}}">
+					</div>
+					<div class="col-lg-8">
+						<p class="recipe-summary">{{{this.summary}}}</p>
+					</div>
+				</div>
+				{{#if this.diets}}
+					<div class="card-footer">
+						{{#each this.dishTypes}}
+							<span class="badge badge-pill badge-success text-wrap">{{this}}</span>
+						{{/each}}
+					</div>
+				{{/if}}
+			</div>
+		{{/each}}
+	{{else}}
+		<div class="row">
+			<div class="col-12">
+				<p class="text-message">No results found! :(</p>
+			</div>
+		</div>
+	{{/if}}
+{{else}}
+	{{#if error}}
+		<div class="row">
+			<div class="col-12">
+				<p class="text-message">{{error.message}}</p>
+			</div>
+		</div>
+	{{else}}
+		<div class="row">
+			<div class="col-12">
+				<p class="text-message">Sorry, and unknown error has happened! :(</p>
+			</div>
+		</div>
+	{{/if}}
+{{/if}}
