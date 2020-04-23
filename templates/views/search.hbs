@@ -39,9 +39,13 @@
 									<p class="recipe-summary">{{{this.summary}}}</p>
 								</div>
 							</div>
-							<div class="card-footer">
-								a footer
-							</div>
+							{{#if this.diets}}
+								<div class="card-footer">
+									{{#each this.diets}}
+										<span class="badge badge-pill badge-success text-wrap">{{this}}</span>
+									{{/each}}
+								</div>
+							{{/if}}
 						</div>
 					{{/each}}
 				{{else}}

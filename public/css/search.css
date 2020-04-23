@@ -16,15 +16,20 @@ body {
 /*  */
 
 .container {
-	background: #f0f0f0;;
+	background: #c0c0c0;;
 }
 
 .card {
-	margin: 7px;
+	margin: 15px 7px;
 }
 
 .card-header h5 {
+	font-weight: bold;
 	margin: 0;
+}
+
+.card-footer .badge {
+	font-size: 0.9em;
 }
 
 /*  */
