@@ -6,6 +6,11 @@ const spoonacular = require('./utils/spoonacular');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Development-specific settings:
+if (process.env.NODE_ENV === 'development') {
+	require('./http_mock/http_mock');  // Mock HTTP requests to external APIs.
+}
+
 // Paths:
 const pubDir = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../templates/views');
