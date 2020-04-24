@@ -4,13 +4,9 @@
 		<div class="card-header">
 			<h5>{{this.title}}</h5>
 		</div>
-		<div class="card-body row">
-			<div class="col-lg-4">
-				<img src="{{this.image}}" class="img-fluid recipe-list-img" alt="{{this.title}}">
-			</div>
-			<div class="col-lg-8">
-				<p class="recipe-summary">{{{this.summary}}}</p>
-			</div>
+		<div class="card-body">
+			<img src="{{this.image}}" class="img-fluid float-left mr-3" alt="{{this.title}}">
+			<p>{{{this.summary}}}</p>
 		</div>
 		{{#if this.dishTypes}}
 			<div class="card-footer">

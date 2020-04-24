@@ -23,6 +23,16 @@ body {
 	margin: 15px 7px;
 }
 
+.card-header {
+	padding: 7px 15px;
+}
+.card-body {
+	padding: 7px;
+}
+.card-footer {
+	padding: 5px 15px;
+}
+
 .card-header h5 {
 	font-weight: bold;
 	margin: 0;
@@ -33,16 +43,6 @@ body {
 }
 
 /*  */
-
-.recipe-list-img {
-	width: 100%;
-	height: auto;
-	padding-bottom: 7px;
-}
-
-.recipe-summary {
-	font-size: 0.96em;
-}
 
 .text-message {
 	text-align: center;
