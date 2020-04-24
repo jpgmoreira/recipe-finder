@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 const spoonacular = require('./utils/spoonacular');
+const appUtils = require('./utils/app_utils');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -37,15 +38,31 @@ app.get('/about', (req, res) => {
 
 app.get('/search', (req, res) => {
 	const searchText = req.query.searchText;
-	const pageNumber = req.query.pageNumber;
-	spoonacular.request(searchText, pageNumber)
+	const pageNumber = Math.max(req.query.pageNumber, 1);
+	const resultsPerPage = 10;  // Spoonacular API allows a maximum of 10 results per request.
+	spoonacular.request(searchText, pageNumber, resultsPerPage)
 		.then((response) => {
-			res.render('search', { result: response.data, query: searchText });
+			const totalResults = response.data.totalResults;
+			const results = response.data.results;
+			let pagination = false;
+			if (totalResults > 0) {
+				pagination = appUtils.searchPagination(pageNumber, resultsPerPage, totalResults);
+			}
+			res.render('search', {
+				results,
+				zeroResults: totalResults == 0,
+				query: searchText,
+				pagination
+			});
 		})
 		.catch((error) => {
+			console.log(error);
 			error = error.response.data;
 			error.message = spoonacular.errorMessage(error.code);
-			res.render('search', { error, query: searchText });
+			res.render('search', {
+				error,
+				query: searchText
+			});
 		});
 });
 

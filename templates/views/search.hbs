@@ -23,19 +23,43 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-12">
-					{{>pagination_nav}}
+			{{#if error}}
+				<div class="row">
+					<div class="col-12">
+						<p class="text-message">{{error.message}}</p>
+					</div>
 				</div>
-			</div>
+			{{/if}}
 
-			{{>search_results}}
-
-			<div class="row">
-				<div class="col-12">
-					{{>pagination_nav}}
+			{{#if zeroResults}}
+				<div class="row">
+					<div class="col-12">
+						<p class="text-message">No results found! :(</p>
+					</div>
 				</div>
-			</div>
+			{{/if}}
+
+			{{!-- Top pagination nav. --}}
+			{{#if pagination}}
+				<div class="row">
+					<div class="col-12">
+						{{>pagination_nav}}
+					</div>
+				</div>
+			{{/if}}
+
+			{{#if results}}
+				{{>search_results}}
+			{{/if}}
+
+			{{!-- Bottom pagination nav. --}}
+			{{#if pagination}}
+				<div class="row">
+					<div class="col-12">
+						{{>pagination_nav}}
+					</div>
+				</div>
+			{{/if}}
 
 		</div>
 
