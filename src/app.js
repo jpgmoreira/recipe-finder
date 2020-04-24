@@ -46,7 +46,7 @@ app.get('/search', (req, res) => {
 			const results = response.data.results;
 			let pagination = false;
 			if (totalResults > 0) {
-				pagination = appUtils.searchPagination(pageNumber, resultsPerPage, totalResults);
+				pagination = appUtils.searchPagination(searchText, pageNumber, resultsPerPage, totalResults);
 			}
 			res.render('search', {
 				results,
@@ -56,7 +56,6 @@ app.get('/search', (req, res) => {
 			});
 		})
 		.catch((error) => {
-			console.log(error);
 			error = error.response.data;
 			error.message = spoonacular.errorMessage(error.code);
 			res.render('search', {
