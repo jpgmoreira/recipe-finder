@@ -31,6 +31,11 @@
 				</div>
 			{{/if}}
 
+			{{!-- 
+				zeroResults used instead of an if-else with results
+				because results is falsy in case of error and in
+				case of no results too.
+			--}}
 			{{#if zeroResults}}
 				<div class="row">
 					<div class="col-12">
