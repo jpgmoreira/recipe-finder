@@ -7,4 +7,4 @@ nock('https://api.spoonacular.com')
 	.persist()
 	.get(() => true)
 	.delay(500)
-	.replyWithFile(200, path.join(__dirname, 'response.json') , {'Content-Type': 'application/json'});
+	.replyWithFile(200, path.join(__dirname, 'responses/search.json') , {'Content-Type': 'application/json'});
