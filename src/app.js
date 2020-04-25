@@ -40,7 +40,7 @@ app.get('/search', (req, res) => {
 	const searchText = req.query.searchText;
 	const pageNumber = Math.max(req.query.pageNumber, 1);
 	const resultsPerPage = 10;  // Spoonacular API allows a maximum of 10 results per request.
-	spoonacular.request(searchText, pageNumber, resultsPerPage)
+	spoonacular.searchRequest(searchText, pageNumber, resultsPerPage)
 		.then((response) => {
 			const totalResults = response.data.totalResults;
 			const results = response.data.results;
@@ -62,6 +62,18 @@ app.get('/search', (req, res) => {
 				error,
 				query: searchText
 			});
+		});
+});
+
+app.get('/recipe', (req, res) => {
+	spoonacular.recipeRequest(req.query.id)
+		.then((response) => {
+			res.status(200).send(response.data);
+		})
+		.catch((error) => {
+			error = error.response.data;
+			error.message = spoonacular.errorMessage(error.code);
+			res.status(404).send(error.message);
 		});
 });
 

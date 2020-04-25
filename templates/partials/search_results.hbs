@@ -2,10 +2,16 @@
 {{#each results}}
 	<div class="card">
 		<div class="card-header">
-			<h5>{{this.title}}</h5>
+			<h5>
+				<a href="/recipe?id={{this.id}}">
+					{{this.title}}
+				</a>
+			</h5>
 		</div>
 		<div class="card-body">
-			<img src="{{this.image}}" class="img-fluid float-left mr-3" alt="{{this.title}}">
+			<a href="/recipe?id={{this.id}}">
+				<img src="{{this.image}}" class="img-fluid float-left mr-3" alt="{{this.title}}">
+			</a>
 			<p>{{{this.summary}}}</p>
 		</div>
 		{{#if this.dishTypes}}
