@@ -5,8 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&display=swap">
-		<link rel="stylesheet" href="css/search.css">
-		<title>Search</title>
+		<link rel="stylesheet" href="css/error.css">
+		<title>Error</title>
 	</head>
 	<body class="d-flex flex-column">
 
@@ -19,38 +19,9 @@
 		<div class="container flex-fill">
 			<div class="row">
 				<div class="col-12">
-					<h2>Search results for <em>{{searchText}}</em>:</h2>
+					{{message}}
 				</div>
 			</div>
-
-			{{!-- Top pagination nav. --}}
-			{{#if pagination}}
-				<div class="row">
-					<div class="col-12">
-						{{>pagination_nav}}
-					</div>
-				</div>
-			{{/if}}
-			
-			<div class="row">
-				<div class="col-12">
-					{{#if results}}
-						{{>search_results}}
-					{{else}}
-						<p class="text-message">No results found! :(</p>
-					{{/if}}
-				</div>
-			</div>
-
-			{{!-- Bottom pagination nav. --}}
-			{{#if pagination}}
-				<div class="row">
-					<div class="col-12">
-						{{>pagination_nav}}
-					</div>
-				</div>
-			{{/if}}
-
 		</div>
 
 		<!-- Bootstrap's required scripts. -->
