@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&display=swap">
 		<link rel="stylesheet" href="css/recipe.css">
-		<title>Search</title>
+		<title>Recipe</title>
 	</head>
 	<body class="d-flex flex-column">
 
@@ -29,7 +29,7 @@
 						<li>Servings: {{response.servings}}.</li>
 						{{#if response.dishTypes}}
 							<li>Dish types:
-								<ul class="details-ul">
+								<ul class="responsive-list">
 									{{#each response.dishTypes}}
 										<li>{{this}}</li>
 									{{/each}}
@@ -38,7 +38,7 @@
 						{{/if}}
 						{{#if response.cuisines}}
 							<li>Cuisines:
-								<ul class="details-ul">
+								<ul class="responsive-list">
 									{{#each response.cuisines}}
 										<li>{{this}}</li>
 									{{/each}}
@@ -47,7 +47,7 @@
 						{{/if}}
 						{{#if response.winePairing.pairedWines}}
 							<li>Wine Pairing:
-								<ul class="details-ul">
+								<ul class="responsive-list">
 									{{#each response.winePairing.pairedWines}}
 										<li>{{this}}</li>
 									{{/each}}
@@ -61,13 +61,55 @@
 				</div>
 			</div>
 
-			{{!-- Instructions --}}
+			{{!-- Description --}}
 			<div class="row">
 				<div class="col-12">
-					<p>{{{response.summary}}}</p>
+					<h3>Description</h3>
+					{{#if response.summary}}
+						<p>{{{response.summary}}}</p>
+					{{else}}
+						No description for this recipe.
+					{{/if}}
 				</div>
 			</div>
 
+			{{!-- Ingredients --}}
+			<div class="row">
+				<div class="col-12">
+					<h3>Ingredients</h3>
+					{{#if response.extendedIngredients}}
+						<ul class="list-group list-group-flush">
+							{{#each response.extendedIngredients}}
+								<li class="list-group-item">
+									<img src="https://spoonacular.com/cdn/ingredients_100x100/{{this.image}}" class="img-fluid" alt="{{this.name}}">
+									{{this.original}}
+								</li>
+							{{/each}}
+						</ul>
+					{{else}}
+						No ingredients provided for this recipe!
+					{{/if}}
+				</div>
+			</div>
+
+			{{!-- Instructions --}}
+			<div class="row">
+				<div class="col-12">
+					<h3>Instructions</h3>
+					{{#if response.instructionsSteps}}
+						<ul class="list-group list-group-flush">
+							{{#each response.instructionsSteps}}
+								<li class="list-group-item">
+									<h6>Step {{this.number}}</h6>
+									{{this.step}}
+								</li>
+							{{/each}}
+						</ul>
+					{{else}}
+						No instructions provided for this recipe!
+					{{/if}}
+				</div>
+			</div>
 
 			{{!-- Source --}}
 

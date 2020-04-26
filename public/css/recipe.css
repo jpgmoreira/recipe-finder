@@ -15,10 +15,6 @@ body {
 
 /*  */
 
-.row {
-	border: 2px solid blue;
-}
-
 .container {
 	background: #f0f0f0;
 }
@@ -30,14 +26,14 @@ body {
 }
 
 @media (min-width: 540px) and (max-width: 991px) {
-	.details-ul {
+	.responsive-list {
 		-webkit-column-count: 2;
 		-moz-column-count: 2;
 		column-count: 2;
 	}	
 }
 @media (min-width: 992px) {
-	.details-ul {
+	.responsive-list {
 		-webkit-column-count: 3;
 		-moz-column-count: 3;
 		column-count: 3;

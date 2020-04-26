@@ -16,4 +16,4 @@ nock('https://api.spoonacular.com')
 	.get(/recipes\/\d*\/information$/)
 	.query(true)
 	.delay(500)
-	.replyWithFile(200, path.join(__dirname, 'responses/recipe.json'), {'Content-Type': 'application/json'});
+	.replyWithFile(200, path.join(__dirname, 'responses/piecake.json'), {'Content-Type': 'application/json'});
