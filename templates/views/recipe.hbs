@@ -112,6 +112,26 @@
 			</div>
 
 			{{!-- Source --}}
+			<div class="row">
+				<div class="col-12">
+					<h5>Credits for this recipe</h5>
+					{{#if response.hasSource}}
+						<ul>
+						{{#if response.sourceUrl}}
+							<li>Source URL: {{response.sourceUrl}}</li>
+						{{/if}}
+						{{#if response.sourceName}}
+							<li>Source Name: {{response.sourceName}}</li>
+						{{/if}}
+						{{#if response.creditsText}}
+							<li>Source Name: {{response.creditsText}}</li>
+						{{/if}}
+						</ul>
+					{{else}}
+						No source information provided for this recipe!
+					{{/if}}
+				</div>
+			</div>
 
 		</div>
 

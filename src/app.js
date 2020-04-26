@@ -77,6 +77,7 @@ app.get('/recipe', (req, res) => {
 			else {
 				response.instructionsSteps = undefined;
 			}
+			response.hasSource = (response.sourceUrl || response.sourceName || response.creditsText);
 			res.render('recipe', { response });
 		})
 		.catch((error) => {
