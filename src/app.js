@@ -68,7 +68,7 @@ app.get('/search', (req, res) => {
 app.get('/recipe', (req, res) => {
 	spoonacular.recipeRequest(req.query.id)
 		.then((response) => {
-			res.status(200).send(response.data);
+			res.render('recipe', { response: response.data });
 		})
 		.catch((error) => {
 			error = error.response.data;

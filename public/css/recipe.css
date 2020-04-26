@@ -1,0 +1,45 @@
+html {
+	height: 100%;
+}
+
+body {
+	background: 
+		linear-gradient(
+			rgba(213, 213, 213, 0.45),
+			rgba(213, 213, 213, 0.45)
+		),
+		url("../img/background.jpg") fixed;
+	background-size: cover;
+	min-height: 100%;
+}
+
+/*  */
+
+.row {
+	border: 2px solid blue;
+}
+
+.container {
+	background: #f0f0f0;
+}
+
+/*  */
+
+.wine-pairing-text {
+	list-style-type: none;
+}
+
+@media (min-width: 540px) and (max-width: 991px) {
+	.details-ul {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		column-count: 2;
+	}	
+}
+@media (min-width: 992px) {
+	.details-ul {
+		-webkit-column-count: 3;
+		-moz-column-count: 3;
+		column-count: 3;
+	}	
+}
