@@ -25,6 +25,10 @@ hbs.registerPartials(partialsPath);
 // Set static directory:
 app.use(express.static(pubDir));
 
+// Allow json and urlencoded (form data) as body parsers for POST method:
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // -------------------------------------------------------------------
 
 // Routes:
@@ -35,6 +39,15 @@ app.get(['/', '/home'], (req, res) => {
 app.get('/about', (req, res) => {
 	res.render('about');
 });
+
+app.get('/signup', (req, res) => {
+	res.render('signup');
+});
+
+app.post('/signup', (req, res) => {
+	res.status(200).send(req.body);
+});
+
 
 app.get('/search', (req, res) => {
 	const searchText = req.query.searchText;

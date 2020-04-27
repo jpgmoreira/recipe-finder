@@ -1,0 +1,40 @@
+html {
+	height: 100%;
+}
+
+body {
+	background: 
+		linear-gradient(
+			rgba(213, 213, 213, 0.45),
+			rgba(213, 213, 213, 0.45)
+		),
+		url("../img/background.jpg") fixed;
+	background-size: cover;
+	min-height: 100%;
+}
+
+/*  */
+
+.card {
+	max-width: 500px;
+	max-height: 630px;
+}
+
+.card-footer {
+	background: white;
+}
+
+.container {
+	padding: 3% 0;
+	background: #f0f0f0;
+}
+
+/*  */
+
+.password-toggle {
+	max-width: 44px;
+}
+
+.password-toggle:focus {
+	outline: none;
+}
