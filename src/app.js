@@ -44,10 +44,17 @@ app.get('/signup', (req, res) => {
 	res.render('signup');
 });
 
+app.get('/signin', (req, res) => {
+	res.render('signin');
+});
+
 app.post('/signup', (req, res) => {
 	res.status(200).send(req.body);
 });
 
+app.post('/signin', (req, res) => {
+	res.status(200).send(req.body);
+});
 
 app.get('/search', (req, res) => {
 	const searchText = req.query.searchText;

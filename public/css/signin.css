@@ -19,10 +19,6 @@ body {
 	width: 500px;
 }
 
-.card-footer {
-	background: white;
-}
-
 .container {
 	padding: 3% 0;
 	background: #f0f0f0;
@@ -30,10 +26,10 @@ body {
 
 /*  */
 
-.password-toggle {
+#password-toggle {
 	max-width: 44px;
 }
 
-.password-toggle:focus {
+#password-toggle:focus {
 	outline: none;
 }
