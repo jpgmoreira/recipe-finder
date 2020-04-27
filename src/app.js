@@ -49,6 +49,7 @@ app.get('/search', (req, res) => {
 				pagination = appUtils.searchPagination(searchText, pageNumber, resultsPerPage, totalResults);
 			}
 
+			// Filter results contents:
 			const results = [];
 			response.results.forEach((result) => {
 				const { id, title, image, summary, dishTypes } = result;
@@ -80,7 +81,7 @@ app.get('/recipe', (req, res) => {
 	spoonacular.recipeRequest(req.query.id)
 		.then((response) => {
 			response = response.data;
-			// analyzedInstructions is provided as an array with at most one object.
+			// analyzedInstructions is (by some reason) provided as an array with at most one object.
 			if (response.analyzedInstructions.length > 0) {
 				response.instructionsSteps = response.analyzedInstructions[0].steps;
 			}
@@ -88,6 +89,12 @@ app.get('/recipe', (req, res) => {
 				response.instructionsSteps = undefined;
 			}
 			response.hasSource = (response.sourceUrl || response.sourceName || response.creditsText);
+
+			// Since the recipe view uses several informations from the response object, the simpler approach
+			//  below was chosen instead of filtering each text property separately, such as it's done
+			//  in the search route above.
+			response = JSON.parse(appUtils.filterBadWords(JSON.stringify(response)));
+			
 			res.render('recipe', { response });
 		})
 		.catch((error) => {

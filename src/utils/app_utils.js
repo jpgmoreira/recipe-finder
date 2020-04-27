@@ -67,9 +67,12 @@ const searchPagination = (searchText, pageNumber, resultsPerPage, totalResults) 
 
 
 /**
- * Returns the text filtered to remove undesired words.
+ * Returns the text filtered, removing undesired words.
+ * In case text is not a string, returns an empty string.
  */
 const filterBadWords = (text) => {
+	if (! (typeof text === 'string'))
+		return '';
 	return filter.clean(text);
 }
 
