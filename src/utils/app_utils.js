@@ -1,6 +1,13 @@
+const Filter = require('bad-words');
+const customBadWords = require('./custom_bad_words');
+
+// Configure bad-words filter:
+const filter = new Filter({ placeHolder: ' ', emptyList: true });
+filter.addWords(...customBadWords);
+
 /**
  * searchPagination:
- * Compute the page buttons to be displayed on search results pagination.
+ * Compute the page buttons content to be displayed on search results pagination.
  * Returns an array of objects with the properties:
  * {
  *   text: string. button's text (page number, 'Previous' or 'Next'),
@@ -58,6 +65,15 @@ const searchPagination = (searchText, pageNumber, resultsPerPage, totalResults) 
 	return pages;
 }
 
+
+/**
+ * Returns the text filtered to remove undesired words.
+ */
+const filterBadWords = (text) => {
+	return filter.clean(text);
+}
+
 module.exports = {
-	searchPagination
+	searchPagination,
+	filterBadWords
 };

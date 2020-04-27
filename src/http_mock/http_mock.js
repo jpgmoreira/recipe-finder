@@ -8,12 +8,10 @@ nock('https://api.spoonacular.com')
 	.persist()
 	.get('/recipes/complexSearch')
 	.query(true)
-	.delay(500)
 	.replyWithFile(200, path.join(__dirname, 'responses/search.json'), {'Content-Type': 'application/json'})
 
 nock('https://api.spoonacular.com')
 	.persist()
 	.get(/recipes\/\d*\/information$/)
 	.query(true)
-	.delay(500)
 	.replyWithFile(200, path.join(__dirname, 'responses/yogurt.json'), {'Content-Type': 'application/json'});

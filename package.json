@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "bad-words": "^3.0.3",
     "express": "^4.17.1",
     "hbs": "^4.1.1"
   }

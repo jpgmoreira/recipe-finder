@@ -38,22 +38,35 @@ app.get('/about', (req, res) => {
 
 app.get('/search', (req, res) => {
 	const searchText = req.query.searchText;
-	const pageNumber = Math.max(req.query.pageNumber, 1);  // Avoid manually set page <= 0 on URL.
+	const pageNumber = Math.max(req.query.pageNumber, 1);  // Prevents page number <= 0.
 	const resultsPerPage = 10;  // Spoonacular API allows a maximum of 10 results per request.
 	spoonacular.searchRequest(searchText, pageNumber, resultsPerPage)
 		.then((response) => {
 			response = response.data;
 			const totalResults = response.totalResults;
-			const results = response.results;
-			let pagination = false;
+			let pagination = false;  // If no results found, do not show pagination bar.
 			if (totalResults > 0) {
 				pagination = appUtils.searchPagination(searchText, pageNumber, resultsPerPage, totalResults);
 			}
+
+			const results = [];
+			response.results.forEach((result) => {
+				const { id, title, image, summary, dishTypes } = result;
+				const newRes = {
+					id,
+					image,
+					title: appUtils.filterBadWords(title),
+					summary: appUtils.filterBadWords(summary),
+					dishTypes: dishTypes.map(appUtils.filterBadWords)
+				}
+				results.push(newRes);
+			});
+		
 			res.render('search', {
 				results,
 				searchText,
 				pagination
-			});
+			});		
 		})
 		.catch((error) => {
 			error = error.response.data;
