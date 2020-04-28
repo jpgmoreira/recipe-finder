@@ -1,6 +1,7 @@
 const express = require('express');
 const spoonacular = require('../utils/spoonacular');
 const appUtils = require('../utils/app_utils');
+const User = require('../models/user');
 
 const router = new express.Router();
 
@@ -22,8 +23,29 @@ router.get('/signin', (req, res) => {
 	res.render('signin');
 });
 
-router.post('/signup', (req, res) => {
-	res.status(200).send(req.body);
+router.post('/signup', async (req, res) => {
+	const { email, username, password, welcomeEmail } = req.body;
+	const user = new User({ username, password });
+	try {
+		await user.save();
+		if (email && email !== '' && welcomeEmail) {
+			// send welcome email.
+		}
+		// setup user session.
+		res.redirect('/home');
+	} catch(e) {
+		if (e.code === 11000) {
+			res.render('signup', {
+				usernameExists: true
+			});
+		}
+		else {
+			res.render('signup', {
+				error: 'Sorry, but it was not possible to create a new account due to an unknown error.'
+			});
+		}
+	}
+
 });
 
 router.post('/signin', (req, res) => {

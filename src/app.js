@@ -3,6 +3,10 @@ const express = require('express');
 const hbs = require('hbs');
 const router = require('./routers/router');
 
+// Connect to the database:
+require('./db/connect');
+
+// Instantiate app and set port number:
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -24,7 +28,7 @@ hbs.registerPartials(partialsPath);
 // Set static directory:
 app.use(express.static(pubDir));
 
-// Allow json and urlencoded (form data) as body parsers for POST method:
+// Allow json and x-www-form-urlencoded as body parsers for POST method:
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
