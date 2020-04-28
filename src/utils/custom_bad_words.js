@@ -54,6 +54,7 @@ const customBadWords = [
 	'lactose',
 	'intolerant',
 	'intolerance',
+	'intolerances',
 
 	'celiac',
 	'coeliac'
