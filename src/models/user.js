@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
@@ -33,6 +34,18 @@ userSchema.methods.generateAuthToken = async function () {
 	user.tokens.push(token);
 	await user.save();
 	return token;
+}
+
+userSchema.statics.findByCredentials = async (username, password) => {
+	const user = await User.findOne({ username });
+	if (!user) {
+		throw new Error();
+	}
+	const isMatch = bcrypt.compareSync(password, user.hashedPassword);
+	if (!isMatch) {
+		throw new Error();
+	}
+	return user;
 }
 
 

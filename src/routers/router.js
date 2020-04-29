@@ -77,12 +77,29 @@ router.post('/signup', auth, async (req, res) => {
 
 });
 
-router.post('/signin', auth, (req, res) => {
+router.post('/signin', auth, async (req, res) => {
 	if (req.user) {
 		res.redirect('/home');
 		return;
-	}	
-	res.status(200).send(req.body);
+	}
+	try {
+		const { username, password } = req.body;
+		const user = await User.findByCredentials(username, password);
+		const token = await user.generateAuthToken();
+		const cookieOptions = {
+			httpOnly: true,
+			secure: true
+		};
+		if (process.env.NODE_ENV === 'development') {
+			cookieOptions.secure = false;
+		}
+		res.cookie('JWT', token, cookieOptions);
+		res.redirect('/home');
+	} catch(e) {
+		res.render('signin', {
+			error: 'An error occurred'
+		});
+	}
 });
 
 //
