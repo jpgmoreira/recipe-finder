@@ -8,9 +8,8 @@ const userSchema = new mongoose.Schema({
 		required: true,
 		unique: true
 	},
-	password: {
+	hashedPassword: {
 		type: String,
-		trim: true,
 		required: true
 	},
 	savedRecipes: [{
@@ -19,6 +18,15 @@ const userSchema = new mongoose.Schema({
 }, {
 	timestamps: true
 });
+
+
+// userSchema.pre('save', async function (next) {
+// 	const user = this;
+// 	if (user.isModified('hashedPassword')) {
+	// 
+// 	}
+// 	next();
+// });
 
 const User = mongoose.model('User', userSchema);
 

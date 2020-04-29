@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const spoonacular = require('../utils/spoonacular');
 const appUtils = require('../utils/app_utils');
 const User = require('../models/user');
@@ -25,7 +26,8 @@ router.get('/signin', (req, res) => {
 
 router.post('/signup', async (req, res) => {
 	const { email, username, password, welcomeEmail } = req.body;
-	const user = new User({ username, password });
+	const hashedPassword = bcrypt.hashSync(password, 8);
+	const user = new User({ username, hashedPassword });
 	try {
 		await user.save();
 		if (email && email !== '' && welcomeEmail) {
