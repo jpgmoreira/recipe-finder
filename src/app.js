@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
 const router = require('./routers/router');
 
@@ -9,6 +10,9 @@ require('./db/connect');
 // Instantiate app and set port number:
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Use cookie-parser:
+app.use(cookieParser());
 
 // Development-specific settings:
 if (process.env.NODE_ENV === 'development') {

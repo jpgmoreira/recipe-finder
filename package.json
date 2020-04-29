@@ -19,6 +19,7 @@
     "axios": "^0.19.2",
     "bad-words": "^3.0.3",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "hbs": "^4.1.1",
     "jsonwebtoken": "^8.5.1",

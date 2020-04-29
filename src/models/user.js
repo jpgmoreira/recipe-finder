@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
 	username: {
@@ -12,6 +13,9 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	tokens: [{
+		type: String
+	}],
 	savedRecipes: [{
 		type: Number
 	}]
@@ -19,14 +23,18 @@ const userSchema = new mongoose.Schema({
 	timestamps: true
 });
 
+userSchema.methods.generateAuthToken = async function () {
+	const user = this;
+	const token = jwt.sign({
+		 _id: user._id.toString() 
+		},process.env.JWT_SECRET , {
+			expiresIn: '10 minutes'
+		});
+	user.tokens.push(token);
+	await user.save();
+	return token;
+}
 
-// userSchema.pre('save', async function (next) {
-// 	const user = this;
-// 	if (user.isModified('hashedPassword')) {
-	// 
-// 	}
-// 	next();
-// });
 
 const User = mongoose.model('User', userSchema);
 

@@ -3,38 +3,50 @@ const bcrypt = require('bcryptjs');
 const spoonacular = require('../utils/spoonacular');
 const appUtils = require('../utils/app_utils');
 const User = require('../models/user');
+const auth = require('../middleware/auth');
 
 const router = new express.Router();
 
-router.get(['/', '/home'], (req, res) => {
+router.get(['/', '/home'], auth, (req, res) => {
+
 	res.render('index');
 });
 
-router.get('/about', (req, res) => {
+router.get('/about', auth, (req, res) => {
 	res.render('about');
 });
 
 // - SignIn and SignUp:
 
-router.get('/signup', (req, res) => {
+router.get('/signup', auth, (req, res) => {
 	res.render('signup');
 });
 
-router.get('/signin', (req, res) => {
+router.get('/signin', auth, (req, res) => {
 	res.render('signin');
 });
 
-router.post('/signup', async (req, res) => {
+router.post('/signup', auth, async (req, res) => {
 	const { email, username, password, welcomeEmail } = req.body;
-	const hashedPassword = bcrypt.hashSync(password, 8);
-	const user = new User({ username, hashedPassword });
+	const hashRounds = 8; 
+	const hashedPassword = bcrypt.hashSync(password, hashRounds);
 	try {
+		const user = new User({ username, hashedPassword });
 		await user.save();
 		if (email && email !== '' && welcomeEmail) {
 			// send welcome email.
 		}
-		// setup user session.
-		res.redirect('/home');
+		// generate user's jwt for initiating a new stateless session:
+		const token = await user.generateAuthToken();
+		const cookieOptions = {
+			httpOnly: true,
+			secure: true
+		};
+		if (process.env.NODE_ENV === 'development') {
+			cookieOptions.secure = false;
+		}
+		res.cookie('JWT', token, cookieOptions).
+		redirect('/home');
 	} catch(e) {
 		if (e.code === 11000) {
 			res.render('signup', {
@@ -50,13 +62,13 @@ router.post('/signup', async (req, res) => {
 
 });
 
-router.post('/signin', (req, res) => {
+router.post('/signin', auth, (req, res) => {
 	res.status(200).send(req.body);
 });
 
 //
 
-router.get('/search', (req, res) => {
+router.get('/search', auth, (req, res) => {
 	const searchText = req.query.searchText;
 	const pageNumber = Math.max(req.query.pageNumber, 1);  // Prevents page number <= 0.
 	const resultsPerPage = 10;  // Spoonacular API allows a maximum of 10 results per request.
@@ -97,7 +109,7 @@ router.get('/search', (req, res) => {
 		});
 });
 
-router.get('/recipe', (req, res) => {
+router.get('/recipe', auth, (req, res) => {
 	spoonacular.recipeRequest(req.query.id)
 		.then((response) => {
 			response = response.data;
