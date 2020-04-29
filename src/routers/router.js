@@ -8,25 +8,40 @@ const auth = require('../middleware/auth');
 const router = new express.Router();
 
 router.get(['/', '/home'], auth, (req, res) => {
-
-	res.render('index');
+	res.render('index', {
+		user: req.user
+	});
 });
 
 router.get('/about', auth, (req, res) => {
-	res.render('about');
+	res.render('about', {
+		user: req.user
+	});
 });
 
 // - SignIn and SignUp:
 
 router.get('/signup', auth, (req, res) => {
+	if (req.user) {
+		res.redirect('/home');
+		return;
+	}
 	res.render('signup');
 });
 
 router.get('/signin', auth, (req, res) => {
+	if (req.user) {
+		res.redirect('/home');
+		return;
+	}
 	res.render('signin');
 });
 
 router.post('/signup', auth, async (req, res) => {
+	if (req.user) {
+		res.redirect('/home');
+		return;
+	}
 	const { email, username, password, welcomeEmail } = req.body;
 	const hashRounds = 8; 
 	const hashedPassword = bcrypt.hashSync(password, hashRounds);
@@ -45,8 +60,8 @@ router.post('/signup', auth, async (req, res) => {
 		if (process.env.NODE_ENV === 'development') {
 			cookieOptions.secure = false;
 		}
-		res.cookie('JWT', token, cookieOptions).
-		redirect('/home');
+		res.cookie('JWT', token, cookieOptions);
+		res.redirect('/home');
 	} catch(e) {
 		if (e.code === 11000) {
 			res.render('signup', {
@@ -63,6 +78,10 @@ router.post('/signup', auth, async (req, res) => {
 });
 
 router.post('/signin', auth, (req, res) => {
+	if (req.user) {
+		res.redirect('/home');
+		return;
+	}	
 	res.status(200).send(req.body);
 });
 
@@ -98,13 +117,15 @@ router.get('/search', auth, (req, res) => {
 			res.render('search', {
 				results,
 				searchText,
-				pagination
+				pagination,
+				user: req.user
 			});		
 		})
 		.catch((error) => {
 			error = error.response.data;
 			res.render('error', {
-				message: spoonacular.errorMessage(error.code)
+				message: spoonacular.errorMessage(error.code),
+				user: req.user
 			});
 		});
 });
@@ -127,12 +148,16 @@ router.get('/recipe', auth, (req, res) => {
 			//  in the search route above.
 			response = JSON.parse(appUtils.filterBadWords(JSON.stringify(response)));
 			
-			res.render('recipe', { response });
+			res.render('recipe', { 
+				response,
+				user: req.user
+			});
 		})
 		.catch((error) => {
 			error = error.response.data;
 			res.render('error', {
-				message: spoonacular.errorMessage(error.code)
+				message: spoonacular.errorMessage(error.code),
+				user: req.user
 			});
 		});
 });
