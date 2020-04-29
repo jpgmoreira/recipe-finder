@@ -179,4 +179,22 @@ router.get('/recipe', auth, (req, res) => {
 		});
 });
 
+router.get('/logout', auth, async (req, res) => {
+	if (!req.token) {
+		res.redirect('/home');
+		return;
+	}
+	try {
+		req.user.tokens = req.user.tokens.filter(token => token !== req.token);
+		await req.user.save();
+		res.clearCookie('JWT', req.token);
+		res.redirect('/home');
+	} catch(e) {
+		res.status(500).render('error', {  // OK to use status with render ?
+			message: 'An error occurred while trying to log you out.'
+		});
+	}
+});
+
+
 module.exports = router;
