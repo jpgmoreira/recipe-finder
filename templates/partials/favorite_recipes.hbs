@@ -1,10 +1,11 @@
 <ul class="list-group">
 	{{#each results}}
-		<li class="list-group-item">
+		<li id="li-{{this.id}}" class="list-group-item">
 			<a href="/recipe?id={{this.id}}">
 				<img src={{this.image}} class="img-fluid recipe-img">
 				<span>{{this.title}}</span>
 			</a>
+			<button id={{this.id}} class="remove-button btn btn-dark float-right">Remove</button>
 		</li>
 	{{/each}}
 </ul>

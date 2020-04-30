@@ -230,6 +230,32 @@ router.get('/favorites', auth, (req, res) => {
 		});
 });
 
+router.post('/favorites/remove', auth, async (req, res) => {
+	if (!req.user) {
+		res.redirect('/home');
+		return;
+	}
+	const id = req.body.id;
+	try {
+		const index = user.savedRecipes.indexOf(id);
+		if (index > -1) {
+			user.savedRecipes.splice(index, 1);
+			await user.save();
+		}
+		if (user.savedRecipes.length > 0) {
+			res.status(202).send();
+		}
+		else {
+			res.status(205).send();
+		}
+	} catch (e) {
+		res.render('message', {
+			user: req.user,
+			message: 'It was not possible to remove that element from your favorites.'
+		});
+	}
+});
+
 router.get('/profile', auth, (req, res) => {
 	if (!req.user) {
 		res.redirect('/home');
