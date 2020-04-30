@@ -1,6 +1,6 @@
 const removeButtons = document.querySelectorAll('.remove-button');
 
-const ajaxRemove = (id) => {
+const ajaxRemoveFavorite = (id) => {
 	const xhr = new XMLHttpRequest();
 	xhr.open('POST', '/favorites/remove');
 	xhr.setRequestHeader('Content-Type', 'application/json');
@@ -20,6 +20,6 @@ const ajaxRemove = (id) => {
 
 removeButtons.forEach((button) => {
 	button.addEventListener('click', () => {
-		ajaxRemove(button.id);
+		ajaxRemoveFavorite(button.id);
 	});
 });

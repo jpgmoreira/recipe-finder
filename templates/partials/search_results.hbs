@@ -1,11 +1,14 @@
 {{!-- Render search results on search.hbs view. --}}
 {{#each results}}
-	<div class="card">
+	<div class="card {{#if this.isFav}}bg-warning{{/if}}">
 		<div class="card-header">
 			<h5>
 				<a href="/recipe?id={{this.id}}">
 					{{{this.title}}}
 				</a>
+				{{#if this.isFav}}
+					<span class="badge badge-warning float-right">Favorite</span>
+				{{/if}}
 			</h5>
 		</div>
 		<div class="card-body">

@@ -17,10 +17,18 @@
 		{{/if}}
 
 		<div class="container flex-fill">
-			{{!-- Image, title and infos --}}
+			{{!-- Title --}}
+			<div>
+				<h2>
+					{{response.title}}
+					{{#if user}}
+						<span id="fav-badge" class="badge badge-warning ml-3 {{#unless isFav}}d-none{{/unless}}">Favorite</span>
+						<button id="fav-button" recipeId={{response.id}} class="btn btn-primary ml-3 {{#if isFav}}d-none{{/if}}">Add to Favorites</button> 
+					{{/if}}
+				</h2>
+			</div>
 			<div class="row">
 				<div class="col-md">
-					<h2>{{{response.title}}}</h2>
 					<img src="{{response.image}}" class="img-fluid" alt="{{response.title}}">
 				</div>
 				<div class="col-md">
@@ -53,9 +61,6 @@
 									{{/each}}
 								</ul>
 							</li>
-						{{/if}}
-						{{#if response.winePairing.pairingText}}
-							<li class="wine-pairing-text"><p>{{{response.winePairing.pairingText}}}</p></li>
 						{{/if}}
 					</ul>
 				</div>
@@ -134,6 +139,8 @@
 			</div>
 
 		</div>
+
+		<script src="js/recipe.js"></script>
 
 		<!-- Bootstrap's required scripts. -->
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

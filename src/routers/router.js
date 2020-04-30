@@ -125,9 +125,14 @@ router.get('/search', auth, (req, res) => {
 			const results = [];
 			response.results.forEach((result) => {
 				const { id, title, image, summary, dishTypes } = result;
+				let isFav = false;
+				if (req.user) {
+					isFav = req.user.savedRecipes.includes(id);
+				}
 				const newRes = {
 					id,
 					image,
+					isFav,
 					title: appUtils.filterBadWords(title),
 					summary: appUtils.filterBadWords(summary),
 					dishTypes: dishTypes.map(appUtils.filterBadWords)
@@ -152,6 +157,7 @@ router.get('/search', auth, (req, res) => {
 });
 
 router.get('/recipe', auth, (req, res) => {
+	const user = req.user;
 	spoonacular.recipeRequest(req.query.id)
 		.then((response) => {
 			response = response.data;
@@ -163,23 +169,31 @@ router.get('/recipe', auth, (req, res) => {
 				response.instructionsSteps = undefined;
 			}
 			response.hasSource = (response.sourceUrl || response.sourceName || response.creditsText);
-
-			// Since the recipe view uses several informations from the response object, the simpler approach
-			//  below was chosen instead of filtering each text property separately, such as it's done
-			//  in the search route above.
-			response = JSON.parse(appUtils.filterBadWords(JSON.stringify(response)));
-			
+			const filtered = appUtils.filterBadWords(JSON.stringify(response));
+			response = JSON.parse(filtered);
+			let isFav = false;
+			if (user) {
+				isFav = user.savedRecipes.includes(req.query.id);
+			}
 			res.render('recipe', { 
 				response,
-				user: req.user
+				isFav,
+				user
 			});
 		})
 		.catch((error) => {
-			error = error.response.data;
-			res.render('message', {
-				message: spoonacular.errorMessage(error.code),
-				user: req.user
-			});
+			try {
+				error = error.response.data;
+				res.render('message', {
+					user,
+					message: spoonacular.errorMessage(error.code)
+				});
+			} catch (e) {
+				res.render('message', {
+					user,
+					message: 'An unknown error occurred'
+				});
+			}
 		});
 });
 
@@ -235,6 +249,7 @@ router.post('/favorites/remove', auth, async (req, res) => {
 		res.redirect('/home');
 		return;
 	}
+	const user = req.user;
 	const id = req.body.id;
 	try {
 		const index = user.savedRecipes.indexOf(id);
@@ -250,9 +265,30 @@ router.post('/favorites/remove', auth, async (req, res) => {
 		}
 	} catch (e) {
 		res.render('message', {
-			user: req.user,
+			user,
 			message: 'It was not possible to remove that element from your favorites.'
 		});
+	}
+});
+
+router.post('/favorites/insert', auth, async (req, res) => {
+	if (!req.user) {
+		res.redirect('/home');
+		return;
+	}
+	const user = req.user;
+	const id = req.body.id;
+	if (user.savedRecipes.includes(id)) {
+		res.status(302).send();
+		return;
+	}
+	try {
+		user.savedRecipes.push(id);
+		await user.save();
+		res.status(201).send();
+	} catch (e) {
+		console.log(e);
+		res.status(417).send();
 	}
 });
 

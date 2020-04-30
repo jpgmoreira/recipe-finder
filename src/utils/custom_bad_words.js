@@ -1,7 +1,13 @@
 /**
  * Words list to be removed from the content fetched from Spoonacular API. 
- * bad-words module does not recognizes strings with ',' , ' ' and '-',
- * and is not case-sensitive.
+ * bad-words module does not recognizes strings with ',' , ' ', '-', and others, and is not case-sensitive.
+ * 
+ * !!! Important !!!:
+ * Do not insert any string that can be interpreted as another data type by JSON.parse() !
+ * For example, do not add string numbers ('30', '10', '0.4', etc.) as custom bad words, 
+ * nor 'null' nor any other thing that may be confused with data other than a string during
+ * a JSON.parse() . This is because those values will be replaced by a placeholder character,
+ * and it may lead to an error while parsing it back to an object.  
  */
 const customBadWords = [
 	'gluten',
@@ -23,7 +29,6 @@ const customBadWords = [
 	'paleo',
 	'primal',
 	'whole',
-	'30',
 	'whole30',
 	'omnivore',
 	'fruitarian',
