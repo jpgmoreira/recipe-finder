@@ -9,6 +9,8 @@ const sendgrid = require('../utils/sendgrid');
 
 const router = new express.Router();
 
+const hashRounds = 8;
+
 router.get(['/', '/home'], auth, (req, res) => {
 	res.render('index', {
 		user: req.user
@@ -45,7 +47,6 @@ router.post('/signup', auth, async (req, res) => {
 		return;
 	}
 	const { email, username, password, welcomeEmail } = req.body;
-	const hashRounds = 8; 
 	const hashedPassword = bcrypt.hashSync(password, hashRounds);
 	try {
 		const user = new User({ username, hashedPassword });
@@ -193,7 +194,7 @@ router.get('/logout', auth, async (req, res) => {
 		res.clearCookie('JWT', req.token);
 		res.redirect('/home');
 	} catch(e) {
-		res.status(500).render('message', {  // OK to use status with render ?
+		res.render('message', { 
 			message: 'An error occurred while trying to log you out.'
 		});
 	}
@@ -256,6 +257,32 @@ router.get('/profile/delete', auth, async (req, res) => {
 		message = 'An error occurred while trying to delete your account!';
 	}
 	res.render('message', {
+		message
+	});
+});
+
+router.post('/profile/changepass', auth, async (req, res) => {
+	if (!req.user) {
+		res.redirect('/home');
+		return;
+	}
+	const user = req.user;
+	const { currPass, newPass } = req.body;
+	let message = '';
+	try {
+		const isMatch = bcrypt.compareSync(currPass, user.hashedPassword);
+		if (!isMatch) {
+			throw new Error();
+		}
+		const hashedPassword = bcrypt.hashSync(newPass, hashRounds);
+		user.hashedPassword = hashedPassword;
+		await user.save();
+		message = 'Password sucessfully updated!';
+	} catch (e) {
+		message = 'Error while trying to update your password!';
+	}
+	res.render('message', {
+		user,
 		message
 	});
 });

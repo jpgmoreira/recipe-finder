@@ -17,7 +17,7 @@
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">Registered at: {{registeredAt}}</li>
 				<li class="list-group-item">
-					<form>
+					<form action="/profile/changepass" method="POST">
 						<input type="password" name="currPass" class="form-control" placeholder="Current Password" required>
 						<input type="password" name="newPass" class="form-control" placeholder="New Password" required>
 						<button type="submit" class="btn btn-primary">Change Password</button>
