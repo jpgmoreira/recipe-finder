@@ -18,16 +18,21 @@
 				<li class="list-group-item">Registered at: {{registeredAt}}</li>
 				<li class="list-group-item">
 					<form>
-						<input type="password" id="currPass" class="form-control" placeholder="Current Password">
-						<input type="password" id="newPass" class="form-control" placeholder="New Password">
+						<input type="password" name="currPass" class="form-control" placeholder="Current Password" required>
+						<input type="password" name="newPass" class="form-control" placeholder="New Password" required>
 						<button type="submit" class="btn btn-primary">Change Password</button>
 					</form>
 				</li>
 				<li class="list-group-item">
-					<button type="button" class="btn btn-danger">Delete Account</button>
+					<button type="button" id="delete-button" class="btn btn-danger">Delete Account</button>
+					<div id="delete-alert" class="alert alert-warning d-none">
+						Are you sure you want to delete your account? <a href="/profile/delete">Yes</a> <a id="delete-no" href="#">No</a>
+					</div>
 				</li>
 			</ul>
 		</div>
+
+		<script src="js/profile.js"></script>
 
 		<!-- Bootstrap's required scripts. -->
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

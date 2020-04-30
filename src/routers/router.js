@@ -143,7 +143,7 @@ router.get('/search', auth, (req, res) => {
 		})
 		.catch((error) => {
 			error = error.response.data;
-			res.render('error', {
+			res.render('message', {
 				message: spoonacular.errorMessage(error.code),
 				user: req.user
 			});
@@ -175,7 +175,7 @@ router.get('/recipe', auth, (req, res) => {
 		})
 		.catch((error) => {
 			error = error.response.data;
-			res.render('error', {
+			res.render('message', {
 				message: spoonacular.errorMessage(error.code),
 				user: req.user
 			});
@@ -193,7 +193,7 @@ router.get('/logout', auth, async (req, res) => {
 		res.clearCookie('JWT', req.token);
 		res.redirect('/home');
 	} catch(e) {
-		res.status(500).render('error', {  // OK to use status with render ?
+		res.status(500).render('message', {  // OK to use status with render ?
 			message: 'An error occurred while trying to log you out.'
 		});
 	}
@@ -222,7 +222,7 @@ router.get('/favorites', auth, (req, res) => {
 					throw new Error();
 				}
 			} catch (e) {
-				res.render('error', {
+				res.render('message', {
 					message: 'It seems that an unexpected error occurred with your favorite recipes list!'
 				});
 			} 
@@ -239,6 +239,24 @@ router.get('/profile', auth, (req, res) => {
 	res.render('profile', {
 		user: req.user,
 		registeredAt
+	});
+});
+
+router.get('/profile/delete', auth, async (req, res) => {
+	if (!req.user) {
+		res.redirect('/home');
+		return;
+	}
+	let message = '';
+	try {
+		res.clearCookie('JWT', req.token);
+		await User.deleteOne({ _id : req.user._id });
+		message = 'Your account was successfully deleted!';
+	} catch (e) {
+		message = 'An error occurred while trying to delete your account!';
+	}
+	res.render('message', {
+		message
 	});
 });
 
