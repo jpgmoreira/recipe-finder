@@ -210,17 +210,21 @@ router.get('/favorites', auth, (req, res) => {
 			});
 		})
 		.catch((error) => {
-			error = error.response.data;
-			if (error.code == 400) {  // No recipes provided to the request.
-				res.render('favorites', {
-					results: undefined
-				});
-			}
-			else {
+			try {
+				error = error.response.data;
+				if (error.code == 400) {  // No recipes provided to the request.
+					res.render('favorites', {
+						results: undefined
+					});
+				}
+				else {
+					throw new Error();
+				}
+			} catch (e) {
 				res.render('error', {
 					message: 'It seems that an unexpected error occurred with your favorite recipes list!'
 				});
-			}
+			} 
 		});
 });
 
