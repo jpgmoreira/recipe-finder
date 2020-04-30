@@ -16,6 +16,13 @@ const recipeRequest = (id) => {
 	return axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`);
 }
 
+// Request for 'information bulk' about all the favorite recipes of a user.
+// Receives an array of recipes' ids. Returns a Promise.
+const favoritesRequest = (ids) => {
+	const commaSep = ids.join(',');
+	return axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${commaSep}&apiKey=${process.env.SPOONACULAR_API_KEY}`);
+}
+
 // Returns an error string according to the HTTP status code passed.
 const errorMessage = (code) => {
 	let message = "";
@@ -36,5 +43,6 @@ const errorMessage = (code) => {
 module.exports = {
 	searchRequest,
 	recipeRequest,
+	favoritesRequest,
 	errorMessage
 };

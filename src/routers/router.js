@@ -198,5 +198,31 @@ router.get('/logout', auth, async (req, res) => {
 	}
 });
 
+router.get('/favorites', auth, (req, res) => {
+	if (!req.user) {
+		res.redirect('/home');
+		return;
+	}
+	spoonacular.favoritesRequest(req.user.savedRecipes)
+		.then((response) => {
+			res.render('favorites', {
+				results: response.data
+			});
+		})
+		.catch((error) => {
+			error = error.response.data;
+			if (error.code == 400) {  // No recipes provided to the request.
+				res.render('favorites', {
+					results: undefined
+				});
+			}
+			else {
+				res.render('error', {
+					message: 'It seems that an unexpected error occurred with your favorite recipes list!'
+				});
+			}
+		});
+});
+
 
 module.exports = router;
