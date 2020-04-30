@@ -4,6 +4,7 @@ const spoonacular = require('../utils/spoonacular');
 const appUtils = require('../utils/app_utils');
 const User = require('../models/user');
 const auth = require('../middleware/auth');
+const sendgrid = require('../utils/sendgrid');
 
 const router = new express.Router();
 
@@ -49,7 +50,8 @@ router.post('/signup', auth, async (req, res) => {
 		const user = new User({ username, hashedPassword });
 		await user.save();
 		if (email && email !== '' && welcomeEmail) {
-			// send welcome email.
+			// Send welcome email:
+			sendgrid.sendWelcomeEmail(username, email);
 		}
 		// generate user's jwt for initiating a new stateless session:
 		const token = await user.generateAuthToken();

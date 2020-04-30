@@ -16,6 +16,7 @@
     "nodemon": "^2.0.3"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.1.0",
     "axios": "^0.19.2",
     "bad-words": "^3.0.3",
     "bcryptjs": "^2.4.3",
