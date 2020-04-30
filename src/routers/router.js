@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const moment = require('moment');
 const spoonacular = require('../utils/spoonacular');
 const appUtils = require('../utils/app_utils');
 const User = require('../models/user');
@@ -226,6 +227,19 @@ router.get('/favorites', auth, (req, res) => {
 				});
 			} 
 		});
+});
+
+router.get('/profile', auth, (req, res) => {
+	if (!req.user) {
+		res.redirect('/home');
+		return;
+	}
+	let registeredAt = moment(user.createdAt).format("MMMM Do YYYY, h:mm a");
+	registeredAt += ` (${moment(user.createdAt).fromNow()})`;
+	res.render('profile', {
+		user: req.user,
+		registeredAt
+	});
 });
 
 

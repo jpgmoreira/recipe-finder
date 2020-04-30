@@ -13,7 +13,20 @@
 		{{>auth_nav}}
 
 		<div class="container flex-fill">
-			
+			<h5>{{user.username}}</h5>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">Registered at: {{registeredAt}}</li>
+				<li class="list-group-item">
+					<form>
+						<input type="password" id="currPass" class="form-control" placeholder="Current Password">
+						<input type="password" id="newPass" class="form-control" placeholder="New Password">
+						<button type="submit" class="btn btn-primary">Change Password</button>
+					</form>
+				</li>
+				<li class="list-group-item">
+					<button type="button" class="btn btn-danger">Delete Account</button>
+				</li>
+			</ul>
 		</div>
 
 		<!-- Bootstrap's required scripts. -->
