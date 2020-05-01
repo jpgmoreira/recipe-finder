@@ -14,40 +14,45 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	tokens: [{
+	tokens: [{  // Array of jwts: one for each user's active sessions.
 		type: String
 	}],
-	savedRecipes: [{
+	favoriteRecipes: [{  // Ids of the user's favorite recipes.
 		type: Number
 	}]
 }, {
 	timestamps: true
 });
 
+/**
+ * Generates a jwt for a new user's session and saves it to its tokens array.
+ * Returns the jwt generated.
+ */
 userSchema.methods.generateAuthToken = async function () {
 	const user = this;
-	const token = jwt.sign({
-		 _id: user._id.toString() 
-		},process.env.JWT_SECRET , {
-			expiresIn: '10 years'
-		});
+	const payload = { _id: user._id.toString() };
+	const options = { expiresIn: '10 minutes' };
+	const token = jwt.sign(payload, process.env.JWT_SECRET, options);
 	user.tokens.push(token);
 	await user.save();
 	return token;
 }
 
+/**
+ * Finds a user document with the given credentials (username and password).
+ * Returns the document found, or throw an Error if something goes badly.
+ */
 userSchema.statics.findByCredentials = async (username, password) => {
 	const user = await User.findOne({ username });
-	if (!user) {
+	if (!user) {  // If no user found with the given username:
 		throw new Error();
 	}
 	const isMatch = bcrypt.compareSync(password, user.hashedPassword);
-	if (!isMatch) {
+	if (!isMatch) {  // If the given password doesn't match with the user's password:
 		throw new Error();
 	}
 	return user;
 }
-
 
 const User = mongoose.model('User', userSchema);
 
