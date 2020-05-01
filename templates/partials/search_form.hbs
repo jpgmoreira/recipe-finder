@@ -1,7 +1,11 @@
 <form action="/search">
-	<input type="text" name="searchText" class="form-control {{#if large}}form-control-lg{{/if}}" placeholder="Your recipe is..." required>
-	<button type="submit" class="btn btn-primary">Search</button>
-
-	{{!-- This form always send request for the first results page. --}}
+	<div class="input-group">
+		<input type="text" name="searchText" class="form-control {{#if large}}form-control-lg{{/if}}" placeholder="Your recipe is..." required>
+		<div class="input-group-append">
+			<button type="submit" class="btn btn-primary">Search</button>
+		</div>
+	</div>
+	
+	{{!-- This form always send a request for the first results page. --}}
 	<input type="hidden" name="pageNumber" value="1">
 </form>

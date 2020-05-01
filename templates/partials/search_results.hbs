@@ -3,9 +3,7 @@
 	<div class="card {{#if this.isFav}}bg-warning{{/if}}">
 		<div class="card-header">
 			<h5>
-				<a href="/recipe?id={{this.id}}">
-					{{{this.title}}}
-				</a>
+				<a href="/recipe?id={{this.id}}">{{{this.title}}}</a>
 				{{#if this.isFav}}
 					<span class="badge badge-warning float-right">Favorite</span>
 				{{/if}}
@@ -13,7 +11,7 @@
 		</div>
 		<div class="card-body">
 			<a href="/recipe?id={{this.id}}">
-				<img src="{{this.image}}" class="img-fluid float-left mr-3" alt="{{this.title}}">
+				<img src="{{this.image}}" class="img-fluid float-left mr-3">
 			</a>
 			<p>{{{this.summary}}}</p>
 		</div>
