@@ -1,7 +1,9 @@
 const axios = require('axios');
 
-// Request for information to put on search results page.
-// Returns a Promise.
+/**
+ * Request for information to put on search results page.
+ * Returns a Promise.
+ */
 const searchRequest = (searchText, pageNumber, resultsPerPage) => {
 	const encodedText = encodeURIComponent(searchText);
 	let offset = (pageNumber - 1) * resultsPerPage;
@@ -10,32 +12,38 @@ const searchRequest = (searchText, pageNumber, resultsPerPage) => {
 	return axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${encodedText}${options}&apiKey=${process.env.SPOONACULAR_API_KEY}`);
 }
 
-// Request for information to put on a recipe's page.
-// Returns a Promise.
+/**
+ * Request for information to put on recipe pages.
+ * Returns a Promise.
+ */
 const recipeRequest = (id) => {
 	return axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`);
 }
 
-// Request for 'information bulk' about all the favorite recipes of a user.
-// Receives an array of recipes' ids. Returns a Promise.
+/**
+ * Request for 'information bulk' about all the favorite recipes of a user.
+ * Receives an array of recipes' ids. Returns a Promise.
+ */
 const favoritesRequest = (ids) => {
 	const commaSep = ids.join(',');
 	return axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${commaSep}&apiKey=${process.env.SPOONACULAR_API_KEY}`);
 }
 
-// Returns an error string according to the HTTP status code passed.
+/**
+ * Returns an error string according to the HTTP status code passed.
+ */
 const errorMessage = (code) => {
 	let message = "";
 	switch (code) {
 		case 402:
-			message = "The maximum number of daily requests was reached :(. Try again tomorrow!";
+			message = "The maximum number of daily requests was reached. Try again tomorrow!";
 			break;
 		case 0:
 		case 404:
-			message = "It was not possible to find the information you requested :(";
+			message = "It was not possible to find the information you requested.";
 			break;
 		default:
-			message = "Unfortunately, your request resulted in an unhandled error :(";
+			message = "Unfortunately, your request resulted in an unhandled error.";
 	}
 	return message;
 }
