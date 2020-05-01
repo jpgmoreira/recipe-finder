@@ -4,7 +4,7 @@ const appUtils = require('../utils/app_utils');
 const { verifyToken } = require('../middleware/auth');
 
 const router = new express.Router();
-router.user(verifyToken);
+router.use(verifyToken);
 
 /**
  * Routes accessible by clients that are or not authenticated. 

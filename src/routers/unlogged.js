@@ -1,5 +1,5 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const sendgrid = require('../external/sendgrid');
 const { verifyToken, unlogged } = require('../middleware/auth');

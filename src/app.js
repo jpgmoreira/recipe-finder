@@ -2,7 +2,9 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 const cookieParser = require('cookie-parser');
-const router = require('./routers/router');
+const freeRouter = require('./routers/free');
+const loggedRouter = require('./routers/logged');
+const unloggedRouter = require('./routers/unlogged');
 
 // Connect to the database:
 require('./db/connect');
@@ -37,8 +39,10 @@ hbs.registerPartials(partialsPath);
 // Set static directory:
 app.use(express.static(pubDir));
 
-// Use router:
-app.use(router);
+// Use routers:
+app.use(freeRouter);
+app.use(loggedRouter);
+app.use(unloggedRouter);
 
 // Start server:
 app.listen(port, () => {

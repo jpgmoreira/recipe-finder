@@ -1,12 +1,12 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const spoonacular = require('../external/spoonacular');
 const User = require('../models/user');
 const { verifyToken, logged } = require('../middleware/auth');
 
 const router = new express.Router();
-router.user(verifyToken);
+router.use(verifyToken);
 
 // Number of rounds to be used by bcrypt algorithm.
 const hashRounds = 8;
