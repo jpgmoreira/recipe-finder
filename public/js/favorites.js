@@ -11,6 +11,7 @@ const ajaxRemoveFavorite = (id) => {
 				li.parentNode.removeChild(li);
 			}
 			else if (xhr.status === 205) {
+				// If no more favorites: reload the page.
 				window.location.replace('/favorites');
 			}		
 		}
