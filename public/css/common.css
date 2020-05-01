@@ -1,7 +1,3 @@
-html {
-	height: 100%;
-}
-
 body {
 	background: 
 		linear-gradient(
@@ -10,26 +6,9 @@ body {
 		),
 		url("../img/background.jpg") fixed;
 	background-size: cover;
-	min-height: 100%;
-}
-
-/*  */
-
-.card {
-	width: 500px;
 }
 
 .container {
-	padding: 3% 0;
+	min-height: 100vh;
 	background: #f0f0f0;
-}
-
-/*  */
-
-#password-toggle {
-	max-width: 44px;
-}
-
-#password-toggle:focus {
-	outline: none;
 }

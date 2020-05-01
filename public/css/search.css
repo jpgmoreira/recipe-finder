@@ -1,24 +1,3 @@
-html {
-	height: 100%;
-}
-
-body {
-	background: 
-		linear-gradient(
-			rgba(213, 213, 213, 0.45),
-			rgba(213, 213, 213, 0.45)
-		),
-		url("../img/background.jpg") fixed;
-	background-size: cover;
-	min-height: 100%;
-}
-
-/*  */
-
-.container {
-	background: #c0c0c0;
-}
-
 .card {
 	margin: 15px 7px;
 }
