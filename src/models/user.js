@@ -39,7 +39,7 @@ userSchema.methods.generateAuthToken = async function () {
 }
 
 /**
- * Finds a user document with the given credentials (username and password).
+ * Search for a user document with the given credentials (username and password).
  * Returns the document found, or throw an Error if something goes badly.
  */
 userSchema.statics.findByCredentials = async (username, password) => {

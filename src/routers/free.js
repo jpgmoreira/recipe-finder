@@ -7,7 +7,7 @@ const router = new express.Router();
 router.user(verifyToken);
 
 /**
- * Routes accessible by clients that are logged in or not. 
+ * Routes accessible by clients that are or not authenticated. 
  */
 
 router.get(['/', '/home'], (req, res) => {

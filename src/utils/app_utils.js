@@ -6,8 +6,7 @@ const filter = new Filter({ placeHolder: '_', emptyList: true });
 filter.addWords(...customBadWords);
 
 /**
- * searchPagination:
- * Compute the page buttons content to be displayed on search results pagination.
+ * Compute the buttons content to be displayed on search results pagination.
  * Returns an array of objects with the properties:
  * {
  *   text: string. button's text (page number, 'Previous' or 'Next'),
