@@ -3,22 +3,20 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&display=swap">
+		<link rel="stylesheet" href="css/bootstrap-4.4.1.min.css">
 		<link rel="stylesheet" href="css/signin.css">
-		<script src="https://kit.fontawesome.com/c7610f614e.js" crossorigin="anonymous"></script>
 		<title>Log In</title>
 	</head>
-	<body class="d-flex flex-column">
+	<body>
 
 		{{>unauth_nav}}
 
 				{{!-- TODO: Show error message when error property is passed. --}}
 
-		<div class="container d-flex flex-fill justify-content-center">
-			<div class="card">
+		<div class="container">
+			<div class="card mx-auto">
 				<div class="card-body">
-					<h5 class="card-title">Welcome back, Log In to access your content</h5>
+					<h5 class="card-title">Welcome back! Log In to access your content</h5>
 					<form id="signin-form" action="/signin" method="POST">
 						<div class="form-group">
 							<label for="input-username">Username:</label>
@@ -26,14 +24,7 @@
 						</div>
 						<div class="form-group">
 							<label for="input-password">Password:</label>
-							<div class="input-group">
-								<input type="password" id="input-password" name="password" class="form-control" placeholder="Enter your password" required>
-								<div class="input-group-append">
-									<button type="button" id="password-toggle" class="input-group-text" data-toggle="input-password" icon-toggle="password-eye">
-										<i id="password-eye" class="fas fa-eye"></i>
-									</button>
-								</div>
-							</div>
+							<input type="password" id="input-password" name="password" class="form-control" placeholder="Enter your password" required>
 						</div>
 						<button type="submit" class="btn btn-primary">Log In</button>
 					</form>
@@ -43,9 +34,5 @@
 
 		<script src="js/signin.js"></script>
 
-		<!-- Bootstrap's required scripts. -->
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	</body>
 </html>
