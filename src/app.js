@@ -1,23 +1,28 @@
 const path = require('path');
 const express = require('express');
-const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
+const cookieParser = require('cookie-parser');
 const router = require('./routers/router');
 
 // Connect to the database:
 require('./db/connect');
 
-// Instantiate app and set port number:
+// Development-specific settings:
+if (process.env.NODE_ENV === 'development') {
+	// Mock HTTP requests to external APIs:
+	require('./mocks/http/nock_config');
+}
+
+// Create app, set port number:
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Use cookie-parser:
+// Use cookie-parser middleware:
 app.use(cookieParser());
 
-// Development-specific settings:
-if (process.env.NODE_ENV === 'development') {
-	require('./http_mock/http_mock');  // Mock HTTP requests to external APIs.
-}
+// Allow json and x-www-form-urlencoded as body parsers for POST method:
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Local paths:
 const pubDir = path.join(__dirname, '../public');
@@ -31,10 +36,6 @@ hbs.registerPartials(partialsPath);
 
 // Set static directory:
 app.use(express.static(pubDir));
-
-// Allow json and x-www-form-urlencoded as body parsers for POST method:
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Use router:
 app.use(router);
