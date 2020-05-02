@@ -6,20 +6,20 @@ const filter = new Filter({ placeHolder: '_', emptyList: true });
 filter.addWords(...customBadWords);
 
 /**
- * Compute the buttons content to be displayed on search results pagination.
+ * Compute the content of the buttons on the page navigation bar of the search results page.
  * Returns an array of objects with the properties:
  * {
  *   text: string. button's text (page number, 'Previous' or 'Next'),
  *   current: boolean. true if it is the current page.
  * 	 blocked: boolean. true if the button cannot be clicked.
- *   dest: string. link to the page destination for the button.
+ *   dest: string. href to the page destination of the button.
  * }
  */
 const searchPagination = (searchText, pageNumber, resultsPerPage, totalResults) => {
 	const maxPage = Math.ceil(totalResults / resultsPerPage);
     const currPage = Math.min(pageNumber, maxPage);
 
-	const pd = 7;  // Number of page numbers to display on the menu.
+	const pd = 7;  // Number of page numbers to display on the bar.
 	const pdFloor = Math.floor(pd/2);
 
 	let low = 0, high = 0;
@@ -66,7 +66,7 @@ const searchPagination = (searchText, pageNumber, resultsPerPage, totalResults) 
 
 
 /**
- * Returns the text filtered, removing undesired words.
+ * Returns the text filtered removing undesired words.
  * In case text is not a string, returns an empty string.
  */
 const filterBadWords = (text) => {

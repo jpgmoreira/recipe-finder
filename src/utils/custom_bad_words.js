@@ -1,6 +1,6 @@
 /**
  * Words list to be removed from the content fetched from Spoonacular API. 
- * bad-words module does not recognizes strings with ',' , ' ', '-', and others, and is not case-sensitive.
+ * bad-words module does not recognizes strings with ',' , ' ', '-', and others, and it is not case-sensitive.
  * 
  * !!! Important !!!:
  * Do not insert any string that can be interpreted as another data type by JSON.parse() !

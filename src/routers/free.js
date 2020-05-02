@@ -7,7 +7,7 @@ const router = new express.Router();
 router.use(verifyToken);
 
 /**
- * Routes accessible by clients that are or not authenticated. 
+ * Routes accessible by all the clients (logged in or not).
  */
 
 router.get(['/', '/home'], (req, res) => {
@@ -78,12 +78,10 @@ router.get('/recipe', (req, res) => {
 	const id = req.query.id;
 	spoonacular.recipeRequest(id).then((response) => {
 		response = response.data;
+		response.instructionsSteps = undefined;
 		// analyzedInstructions is (by some reason) provided as an array with at most one object.
 		if (response.analyzedInstructions.length > 0) {
 			response.instructionsSteps = response.analyzedInstructions[0].steps;
-		}
-		else {
-			response.instructionsSteps = undefined;
 		}
 		response.hasSource = (response.sourceUrl || response.sourceName || response.creditsText);
 		const filtered = appUtils.filterBadWords(JSON.stringify(response));

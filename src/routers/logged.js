@@ -8,9 +8,6 @@ const { verifyToken, logged } = require('../middleware/auth');
 const router = new express.Router();
 router.use(verifyToken);
 
-// Number of rounds to be used by bcrypt algorithm.
-const hashRounds = 8;
-
 /**
  * Routes accessible only by clients that are logged in. 
  */
@@ -38,7 +35,7 @@ router.get('/favorites', logged, (req, res) => {
 	.catch((error) => {
 		try {
 			error = error.response.data;
-			if (error.code == 400) {  // No recipes provided to the request.
+			if (error.code == 400) {  // Response provided no recipes.
 				res.render('favorites', {
 					results: undefined
 				});
@@ -65,10 +62,10 @@ router.post('/favorites/remove', logged, async (req, res) => {
 			await user.save();
 		}
 		if (user.favoriteRecipes.length > 0) {
-			res.status(202).send();
+			res.status(202).send();  // Indicates that favorites list didn't become empty.
 		}
 		else {
-			res.status(205).send();
+			res.status(205).send();  // Indicates that favorites list became empty.
 		}
 	} catch (e) {
 		res.render('message', {
@@ -82,7 +79,7 @@ router.post('/favorites/insert', logged, async (req, res) => {
 	const user = req.user;
 	const id = req.body.id;
 	if (user.favoriteRecipes.includes(id)) {
-		res.status(302).send();
+		res.status(302).send();  // Favorites list already contains the element.
 		return;
 	}
 	try {
@@ -99,7 +96,7 @@ router.post('/favorites/insert', logged, async (req, res) => {
 
 router.get('/profile', logged, (req, res) => {
 	const user = req.user;
-	let registeredAt = moment(user.createdAt).format("MMMM Do YYYY, h:mm a");
+	let registeredAt = moment(user.createdAt).format("MMMM Do YYYY, HH:mm");
 	registeredAt += ` (${moment(user.createdAt).fromNow()})`;
 	res.render('profile', {
 		user,
@@ -130,7 +127,7 @@ router.post('/profile/changepass', logged, async (req, res) => {
 		if (!isMatch) {
 			throw new Error();
 		}
-		const hashedPassword = bcrypt.hashSync(newPass, hashRounds);
+		const hashedPassword = bcrypt.hashSync(newPass, process.env.BCRYPT_ROUNDS);
 		user.hashedPassword = hashedPassword;
 		await user.save();
 		message = 'Password sucessfully updated!';

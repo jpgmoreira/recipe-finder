@@ -21,7 +21,7 @@ const recipeRequest = (id) => {
 }
 
 /**
- * Request for 'information bulk' about all the favorite recipes of a user.
+ * Request for "information bulk" about all the favorite recipes of a user.
  * Receives an array of recipes' ids. Returns a Promise.
  */
 const favoritesRequest = (ids) => {
@@ -30,7 +30,7 @@ const favoritesRequest = (ids) => {
 }
 
 /**
- * Returns an error string according to the HTTP status code passed.
+ * Returns an error string according to the HTTP status code.
  */
 const errorMessage = (code) => {
 	let message = "";

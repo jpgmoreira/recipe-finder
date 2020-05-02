@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	tokens: [{  // Array of jwts: one for each user's active sessions.
+	tokens: [{  // Array of jwts: one for each user's active session.
 		type: String
 	}],
 	favoriteRecipes: [{  // Ids of the user's favorite recipes.
@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.generateAuthToken = async function () {
 	const user = this;
 	const payload = { _id: user._id.toString() };
-	const options = { expiresIn: '10 minutes' };
+	const options = { expiresIn: '7 days' };
 	const token = jwt.sign(payload, process.env.JWT_SECRET, options);
 	user.tokens.push(token);
 	await user.save();

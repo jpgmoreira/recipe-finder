@@ -7,9 +7,6 @@ const { verifyToken, unlogged } = require('../middleware/auth');
 const router = new express.Router();
 router.use(verifyToken);
 
-// Number of rounds to be used by bcrypt algorithm.
-const hashRounds = 8;
-
 /**
  * Routes accessible only by clients that are not logged in. 
  */
@@ -25,7 +22,7 @@ router.get('/signin', unlogged, (req, res) => {
 router.post('/signup', unlogged, async (req, res) => {
 	try {
 		const { email, username, password, welcomeEmail } = req.body;
-		const hashedPassword = bcrypt.hashSync(password, hashRounds);	
+		const hashedPassword = bcrypt.hashSync(password, process.env.BCRYPT_ROUNDS);	
 		const user = new User({ username, hashedPassword });
 		await user.save();
 		if (email && email !== '' && welcomeEmail) {
@@ -44,7 +41,7 @@ router.post('/signup', unlogged, async (req, res) => {
 		res.cookie('JWT', token, cookieOptions);
 		res.redirect('/home');
 	} catch(e) {
-		if (e.code === 11000) {  // mongoDB error. Document with given username already exists.
+		if (e.code === 11000) {  // mongoDB error: Document with given username already exists.
 			res.render('signup', {
 				usernameExists: true
 			});

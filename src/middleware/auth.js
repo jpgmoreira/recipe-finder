@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 /**
- * For all routes.
+ * For all routes: Verify if the client is sending and authentication token.
  */
 const verifyToken = async (req, res, next) => {
 	const token = req.cookies.JWT;
