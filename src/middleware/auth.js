@@ -39,7 +39,7 @@ const verifyToken = async (req, res, next) => {
 const logged = (req, res, next) => {
 	if (!req.user) {
 		res.render('message', {
-			message: 'You cannot access this page without loggin in.'
+			message: 'You must log in first before accessing this page.'
 		});
 		return;
 	}
@@ -52,7 +52,8 @@ const logged = (req, res, next) => {
 const unlogged = (req, res, next) => {
 	if (req.user) {
 		res.render('message', {
-			message: 'You must log in first before accessing this page.'
+			user: req.user,
+			message: 'You cannot acces this page while logged in.'
 		});
 		return;
 	}

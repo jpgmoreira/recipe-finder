@@ -6,6 +6,7 @@ $deleteButton.addEventListener('click', () => {
 	$deleteAlert.classList.remove('d-none');
 });
 
-$deleteNo.addEventListener('click', () => {
+$deleteNo.addEventListener('click', (e) => {
+	e.preventDefault();
 	$deleteAlert.classList.add('d-none');
 });

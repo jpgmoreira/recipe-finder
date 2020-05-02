@@ -37,7 +37,7 @@ router.get('/search', (req, res) => {
 			const { id, title, image, summary, dishTypes } = result;
 			let isFav = false;
 			if (user) {
-				isFav = user.savedRecipes.includes(id);
+				isFav = user.favoriteRecipes.includes(id);
 			}
 			const newRes = {
 				id,
@@ -67,14 +67,15 @@ router.get('/search', (req, res) => {
 		} catch (e) {
 			res.render('message', {
 				user,
-				message: 'An unknown error occurred'
+				message: 'An unknown error occurred.'
 			});
 		}
 	});
 });
 
 router.get('/recipe', (req, res) => {
-	const { user, id } = req;
+	const user = req.user;
+	const id = req.query.id;
 	spoonacular.recipeRequest(id).then((response) => {
 		response = response.data;
 		// analyzedInstructions is (by some reason) provided as an array with at most one object.
@@ -89,7 +90,7 @@ router.get('/recipe', (req, res) => {
 		response = JSON.parse(filtered);
 		let isFav = false;
 		if (user) {
-			isFav = user.savedRecipes.includes(id);
+			isFav = user.favoriteRecipes.includes(id);
 		}
 		res.render('recipe', { 
 			response,
@@ -107,7 +108,7 @@ router.get('/recipe', (req, res) => {
 		} catch (e) {
 			res.render('message', {
 				user,
-				message: 'An unknown error occurred'
+				message: 'An unknown error occurred.'
 			});
 		}
 	});

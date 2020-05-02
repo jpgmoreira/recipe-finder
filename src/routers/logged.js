@@ -18,7 +18,7 @@ const hashRounds = 8;
 router.get('/logout', logged, async (req, res) => {
 	try {
 		const { user, token } = req;
-		user.tokens = user.tokens.filter(token => token !== token);
+		user.tokens = user.tokens.filter(elem => elem !== token);
 		await user.save();
 		res.clearCookie('JWT', token);
 		res.redirect('/home');
@@ -30,7 +30,7 @@ router.get('/logout', logged, async (req, res) => {
 });
 
 router.get('/favorites', logged, (req, res) => {
-	spoonacular.favoritesRequest(req.user.savedRecipes).then((response) => {
+	spoonacular.favoritesRequest(req.user.favoriteRecipes).then((response) => {
 		res.render('favorites', {
 			results: response.data
 		});
@@ -59,12 +59,12 @@ router.post('/favorites/remove', logged, async (req, res) => {
 	try {
 		const user = req.user;
 		const id = req.body.id;	
-		const index = user.savedRecipes.indexOf(id);
+		const index = user.favoriteRecipes.indexOf(id);
 		if (index > -1) {
-			user.savedRecipes.splice(index, 1);
+			user.favoriteRecipes.splice(index, 1);
 			await user.save();
 		}
-		if (user.savedRecipes.length > 0) {
+		if (user.favoriteRecipes.length > 0) {
 			res.status(202).send();
 		}
 		else {
@@ -81,12 +81,12 @@ router.post('/favorites/remove', logged, async (req, res) => {
 router.post('/favorites/insert', logged, async (req, res) => {
 	const user = req.user;
 	const id = req.body.id;
-	if (user.savedRecipes.includes(id)) {
+	if (user.favoriteRecipes.includes(id)) {
 		res.status(302).send();
 		return;
 	}
 	try {
-		user.savedRecipes.push(id);
+		user.favoriteRecipes.push(id);
 		await user.save();
 		res.status(201).send();
 	} catch (e) {

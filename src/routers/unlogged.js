@@ -73,7 +73,7 @@ router.post('/signin', unlogged, async (req, res) => {
 		res.redirect('/home');
 	} catch(e) {
 		res.render('signin', {
-			error: 'An error occurred.'
+			error: 'An error has occurred.'
 		});
 	}
 });
