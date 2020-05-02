@@ -27,6 +27,13 @@ router.get('/logout', logged, async (req, res) => {
 });
 
 router.get('/favorites', logged, (req, res) => {
+	if (req.user.favoriteRecipes.length === 0) {
+		// If the user has no favorite recipes: Render the page directly, saving a request.
+		res.render('favorites', {
+			results: []
+		});
+		return;
+	}
 	spoonacular.favoritesRequest(req.user.favoriteRecipes).then((response) => {
 		res.render('favorites', {
 			results: response.data
@@ -37,7 +44,7 @@ router.get('/favorites', logged, (req, res) => {
 			error = error.response.data;
 			if (error.code == 400) {  // Response provided no recipes.
 				res.render('favorites', {
-					results: undefined
+					results: []
 				});
 			}
 			else {
