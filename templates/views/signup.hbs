@@ -12,11 +12,12 @@
 
 		{{>unauth_nav}}
 
-		{{!-- TODO: Show error message when error property is passed. --}}
-
 		<div class="container">
 			<div class="card mx-auto">
 				<div class="card-body">
+					{{#if error}}
+						<div class="alert alert-danger">{{error}}</div>
+					{{/if}}
 					<h5 class="card-title">Create an Account</h5>
 					<form action="/signup" method="POST">
 						<div class="form-group">

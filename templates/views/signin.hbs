@@ -17,6 +17,9 @@
 		<div class="container">
 			<div class="card mx-auto">
 				<div class="card-body">
+					{{#if error}}
+						<div class="alert alert-danger">{{error}}</div>
+					{{/if}}
 					<h5 class="card-title">Welcome back! Log In to access your content</h5>
 					<form action="/signin" method="POST">
 						<div class="form-group">
