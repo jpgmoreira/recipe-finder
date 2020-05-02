@@ -4,7 +4,7 @@ const User = require('../models/user');
 /**
  * For all routes.
  */
-const verifyToken = (req, res, next) => {
+const verifyToken = async (req, res, next) => {
 	const token = req.cookies.JWT;
 	if (token) {
 		try {
@@ -27,7 +27,6 @@ const verifyToken = (req, res, next) => {
 					message: 'We could not verify your identity. Please, log in and try again.'
 				});
 			}
-			res.status(401).end();
 			return;
 		}
 	}
@@ -42,7 +41,6 @@ const logged = (req, res, next) => {
 		res.render('message', {
 			message: 'You cannot access this page without loggin in.'
 		});
-		res.status(401).end();
 		return;
 	}
 	next();
@@ -56,7 +54,6 @@ const unlogged = (req, res, next) => {
 		res.render('message', {
 			message: 'You must log in first before accessing this page.'
 		});
-		res.status(401).end();
 		return;
 	}
 	next();
