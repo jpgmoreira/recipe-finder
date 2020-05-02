@@ -127,7 +127,7 @@ router.post('/profile/changepass', logged, async (req, res) => {
 		if (!isMatch) {
 			throw new Error();
 		}
-		const hashedPassword = bcrypt.hashSync(newPass, process.env.BCRYPT_ROUNDS);
+		const hashedPassword = bcrypt.hashSync(newPass, 8);
 		user.hashedPassword = hashedPassword;
 		await user.save();
 		message = 'Password sucessfully updated!';
