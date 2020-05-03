@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const freeRouter = require('./routers/free');
 const loggedRouter = require('./routers/logged');
 const unloggedRouter = require('./routers/unlogged');
+const { verifyToken } = require('./middleware/auth');
 
 // Connect to the database:
 require('./db/connect');
@@ -43,6 +44,14 @@ app.use(express.static(pubDir));
 app.use(freeRouter);
 app.use(loggedRouter);
 app.use(unloggedRouter);
+
+// Route for 404 page:
+app.get('*', verifyToken, (req, res) => {
+	res.render('message', {
+		user: req.user,
+		message: 'Page not found!'
+	});
+});
 
 // Start server:
 app.listen(port, () => {
