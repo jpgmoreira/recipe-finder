@@ -30,13 +30,15 @@
 				</h2>
 			</div>
 
+			<hr>
+
 			{{!-- Image and info: --}}
 			<div class="row">
 				<div class="col-md">
 					<img src={{response.image}} class="img-fluid">
 				</div>
 				<div class="col-md">
-					<ul>
+					<ul class="info-list">
 						<li>Ready in {{response.readyInMinutes}} minutes.</li>
 						<li>Servings: {{response.servings}}.</li>
 						{{#if response.dishTypes}}
@@ -70,6 +72,8 @@
 				</div>
 			</div>
 
+			<hr>
+
 			{{!-- Description --}}
 			<div class="row">
 				<div class="col-12">
@@ -81,6 +85,8 @@
 					{{/if}}
 				</div>
 			</div>
+
+			<hr>
 
 			{{!-- Ingredients --}}
 			<div class="row">
@@ -101,6 +107,8 @@
 				</div>
 			</div>
 
+			<hr>
+
 			{{!-- Instructions --}}
 			<div class="row">
 				<div class="col-12">
@@ -119,6 +127,8 @@
 					{{/if}}
 				</div>
 			</div>
+
+			<hr>
 
 			{{!-- Source --}}
 			<div class="row">

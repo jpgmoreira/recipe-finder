@@ -12,3 +12,22 @@
 		column-count: 3;
 	}	
 }
+
+/*  */
+
+.container {
+	background: #fff;
+	padding-bottom: 30px;
+}
+
+.row {
+	padding: 10px 20px 2px 20px;
+}
+
+/*  */
+
+.info-list > li {
+	padding-bottom: 15px;
+	font-size: 1.1em;
+	font-style: italic;
+}
