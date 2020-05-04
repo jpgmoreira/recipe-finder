@@ -13,7 +13,11 @@ body {
 	background: #f0f0f0;
 }
 
-/*  */
+/* - Navbar -  */
+
+.navbar {
+	font-size: 1.3em;
+}
 
 .img-navbar {
 	max-width: 60px;
@@ -21,4 +25,10 @@ body {
 
 .navbar-brand {
 	padding: 5px;
+}
+
+/*  */
+
+a:hover {
+	text-decoration: none;
 }
