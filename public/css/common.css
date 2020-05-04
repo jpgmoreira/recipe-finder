@@ -1,8 +1,8 @@
 body {
 	background: 
 		linear-gradient(
-			rgba(213, 213, 213, 0.45),
-			rgba(213, 213, 213, 0.45)
+			rgba(213, 213, 213, 0.55),
+			rgba(213, 213, 213, 0.55)
 		),
 		url("../img/background.jpg") fixed;
 	background-size: cover;
