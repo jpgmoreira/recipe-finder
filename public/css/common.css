@@ -12,3 +12,13 @@ body {
 	min-height: 100vh;
 	background: #f0f0f0;
 }
+
+/*  */
+
+.img-navbar {
+	max-width: 60px;
+}
+
+.navbar-brand {
+	padding: 5px;
+}
