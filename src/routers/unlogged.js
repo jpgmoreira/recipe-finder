@@ -20,8 +20,8 @@ router.get('/signin', unlogged, (req, res) => {
 });
 
 router.post('/signup', unlogged, async (req, res) => {
+	const { email, username, password, welcomeEmail } = req.body;
 	try {
-		const { email, username, password, welcomeEmail } = req.body;
 		const hashedPassword = bcrypt.hashSync(password, 8);	
 		const user = new User({ username, hashedPassword });
 		await user.save();
@@ -43,6 +43,7 @@ router.post('/signup', unlogged, async (req, res) => {
 	} catch(e) {
 		if (e.code === 11000) {  // mongoDB error: Document with given username already exists.
 			res.render('signup', {
+				username,
 				usernameExists: true
 			});
 		}
