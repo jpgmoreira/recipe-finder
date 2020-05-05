@@ -1,0 +1,35 @@
+p {
+	margin: 0;
+}
+
+h5 {
+	font-weight: bold;
+}
+
+h1 {
+	padding: 15px 0;
+}
+
+section {
+	padding: 0px 15px;
+}
+
+/*  */
+
+.container {
+	padding-bottom: 70px;
+}
+
+.list-group-item {
+	background: #f0f0f0;
+}
+
+/*  */
+
+.technologies-list > li {
+	padding-bottom: 15px;
+}
+
+#bg-img {
+	max-width: 600px;
+}

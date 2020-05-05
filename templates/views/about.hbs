@@ -7,6 +7,7 @@
 		<link rel="icon" href="img/favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/common.css">
+		<link rel="stylesheet" href="css/about.css">
 		<title>About</title>
 	</head>
 	<body>
@@ -18,7 +19,113 @@
 		{{/if}}
 
 		<div class="container">
-			<h1>This is the about page.</h1>
+
+			<h1>About</h1>
+
+			<section>
+				<h2>Author:</h2>
+				<ul>
+					<li>João Pedro Moreira</li>
+					<li>Email: jpgmoreira19@gmail.com</li>
+					<li>GitHub: <a href="https://github.com/jpgmoreira">jpgmoreira</a></li>
+				</ul>
+			</section>
+
+			<hr>
+
+			<section>
+				<h2>Description:</h2>
+				<p>
+This website is my first project for learning <a href="https://nodejs.org/">Node.js</a> .<br>
+The technologies and some tools used to construct this site are listed in the section below.<br><br>
+
+The information pertinent to the recipes shown on this website, such as recipe names, descriptions, ingredients, 
+ingredient images, and preparing instructions, are fetched from the <a href="https://spoonacular.com/food-api">Spoonacular</a> food and recipes API.<br><br>
+
+Since I don't have control over the information that my application receives from the Spoonacular API, I decided to filter 
+it and remove a set of words and terms related to allergies and special diets, such as "gluten free" and "lacto ovo vegetarian".
+The terms I remove from Spoonacular's content are replaced by asterisk (*) characters.<br><br>
+
+<b class="text-danger">This website was built with the only purposes of learning and entertainment. I do not recommend you to prepare any food based on the recipes presented here.</b><br><br>
+
+If you have any comments or suggestions about this website, want to suggest some improvement for the project or its source code, 
+or if you find something strange or an error/bug, please contact me by email or open an issue on the project's page on GitHub.<br><br>
+
+Have fun :)
+				</p>
+			</section>
+
+			<hr>
+
+			<section>
+				<h2>Technologies used:</h2>
+				<ul class="technologies-list">
+					<li><b>Front-end:</b>
+						<p>HTML, CSS3, JavaScript, <a href="https://getbootstrap.com/">Bootstrap 4.4.1</a></p>
+					</li>
+					<li><b>Back-end:</b>
+						<p>
+							<a href="https://nodejs.org/">Node.js</a>, 
+							<a href="https://expressjs.com/">Express</a>, 
+							<a href="https://www.mongodb.com/">MongoDB</a>, 
+							<a href="https://mongoosejs.com/">Mongoose</a>, 
+							<a href="https://handlebarsjs.com/">Handlebars</a>, 
+							<a href="https://jwt.io/">JSON Web Tokens</a>.
+						</p>
+					</li>
+					<li><b>Hosting:</b>
+						<ul>
+							<li>The production MongoDB database is hosted on <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a>.</li>
+							<li>The web server is hosted on <a href="https://www.heroku.com/">Heroku</a>.</li>
+							<li>The source code is hosted on a GitHub repository.</li>
+						</ul>
+					</li>
+					<li><b>External APIs:</b>
+						<ul>
+							<li><a href="https://spoonacular.com/food-api">Spoonacular API</a>.</li>
+							<li><a href="https://sendgrid.com/solutions/email-api/">Sendgrid email API</a>.</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+
+			<hr>
+
+			<section>
+				<h2>Assets credits:</h2>
+				<ul class="list-group list-group-flush text-center">
+					<li class="list-group-item"><h5>Home page logo:</h5>
+						<ul class="list-inline">
+							<li><img src="img/logo.png" class="img-fluid"></li>
+							<li><a href="https://www.freelogodesign.org/">https://www.freelogodesign.org/</a></li>
+						</ul>
+					</li>
+					<li class="list-group-item"><h5>Navbar logo:</h5>
+						<ul class="list-inline">
+							<li><img src="img/navbar.png" class="img-fluid"></li>
+							<li><a href="https://www.freelogodesign.org/">https://www.freelogodesign.org/</a></li>
+						</ul>
+					</li>
+					<li class="list-group-item"><h5>Favicon:</h5>
+						<ul class="list-inline">
+							<li><img src="img/favicon.ico" class="img-fluid"></li>
+							<li><a href="https://icon-icons.com/">https://icon-icons.com/</a></li>
+						</ul>
+					</li>
+					<li class="list-group-item"><h5>Background image:</h5>
+						<ul class="list-inline">
+							<li><img src="img/background.jpg" id="bg-img" class="img-fluid"></li>
+							<li><a href="https://unsplash.com/">https://unsplash.com/</a></li>
+							<li>Photo by Rachel Park on Unsplash</li>
+						</ul>
+					</li>
+					<li class="list-group-item">
+						All the information and images related to recipes and ingredients are obtained from the <a href="https://spoonacular.com/food-api">Spoonacular API</a>.<br>
+						References to the original source of each recipe are show as provided by Spoonacular at the bottom of the recipe page.
+					</li>
+				</ul>
+			</section>
+
 		</div>
 
 		{{!-- Bootstrap required scripts: --}}
