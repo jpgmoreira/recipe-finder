@@ -2,7 +2,7 @@ const Filter = require('bad-words');
 const customBadWords = require('./custom_bad_words');
 
 // Configure bad-words filter:
-const filter = new Filter({ placeHolder: '_', emptyList: true });
+const filter = new Filter({ placeHolder: '*', emptyList: true });
 filter.addWords(...customBadWords);
 
 /**
