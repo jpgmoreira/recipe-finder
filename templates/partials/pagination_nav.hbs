@@ -3,12 +3,12 @@
 	<ul class="pagination m-0">
 		{{#each pagination}}
 			{{#if this.current}}
-				<li class="page-item active">
-					<span class="page-link">{{this.text}}</span>
+				<li class="page-item active {{this.required}}">
+					<span class="page-link">{{{this.text}}}</span>
 				</li>
 			{{else}}
-				<li class="page-item {{#if this.blocked}}disabled{{/if}}">
-					<a class="page-link" href={{this.dest}}>{{this.text}}</a>
+				<li class="page-item {{this.required}} {{#if this.blocked}}disabled{{/if}}">
+					<a class="page-link" href={{this.dest}}>{{{this.text}}}</a>
 				</li>
 			{{/if}}
 		{{/each}}
