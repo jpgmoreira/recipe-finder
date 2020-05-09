@@ -30,3 +30,17 @@
 h2 {
 	padding: 10px;
 }
+
+/*  */
+
+@media (max-width: 569px) {
+	.result-image {
+		width: 100%;
+	}
+}
+
+@media (min-width: 570px) {
+	.result-image {
+		float: left;
+	}
+}
